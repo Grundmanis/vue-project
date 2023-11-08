@@ -48,7 +48,7 @@ export default {
         return activeStore.updatedStyles
       }
 
-      return elementsStore.dom.children[elementData.key].config.styles
+      return elementsStore.dom.children[elementData.key].styles
     },
     isActive() {
       return activeStore.active === this.id ? 'active' : ''
@@ -102,7 +102,7 @@ export default {
       const newElement = {
         id: newId,
         parentId: elementData.element.parentId,
-        config: { styles: newStyles },
+        styles: newStyles,
         type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
       }
 
