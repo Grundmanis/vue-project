@@ -1,4 +1,4 @@
-describe('Sidebar', () => {
+describe('Toolbar', () => {
   it('should delete an element', () => {
     cy.visit('/')
     cy.get('#side-panel button').click(); // first button is the box-element
@@ -49,5 +49,72 @@ describe('Sidebar', () => {
     cy.get('.b-box').eq(0).contains('2');
     cy.get('.b-box').eq(1).trigger('mouseover');
     cy.get('.b-box').eq(1).contains('6');
+  })
+
+  describe.only('Duplicate', () => {
+
+    beforeEach(() => {
+      cy.visit('/')
+      cy.get('#side-panel button').click(); // first button is the box-element
+      cy.get('.b-box').trigger('click');
+      cy.get('.b-style-minHeight').clear();
+      cy.get('.b-style-minHeight').type('50px');
+      cy.get('.b-box').trigger('mouseover');
+      cy.get('.b-box .b-action-duplicate').click();
+    });
+
+    it('should duplicate element with styles', () => {
+
+      cy.get('.b-box').eq(1).should('have.css', 'minHeight', '50px');
+    })
+    it('should duplicate multiple element with updated styles', () => {
+
+      cy.get('.b-box').eq(1).trigger('mouseover');
+      cy.get('.b-box .b-action-duplicate').eq(1).click();
+      cy.get('.b-box').eq(2).trigger('mouseover');
+      cy.get('.b-box .b-action-duplicate').eq(2).click();
+      cy.get('.b-box').eq(0).should('have.css', 'minHeight', '50px');
+      cy.get('.b-box').eq(1).should('have.css', 'minHeight', '50px');
+      cy.get('.b-box').eq(2).should('have.css', 'minHeight', '50px');
+      cy.get('.b-box').eq(3).should('have.css', 'minHeight', '50px');
+    })
+    it('should change the style of duplicated element', () => {
+
+      cy.get('.b-box').eq(1).click();
+      
+      cy.get('.b-style-minHeight').clear();
+      cy.get('.b-style-minHeight').type('20px');
+      cy.get('.b-box').eq(1).trigger('mouseover');
+      cy.get('.b-box .b-action-duplicate').eq(1).click();
+
+      cy.get('.b-box').eq(0).should('have.css', 'minHeight', '50px');
+      cy.get('.b-box').eq(1).should('have.css', 'minHeight', '20px');
+      cy.get('.b-box').eq(2).should('have.css', 'minHeight', '20px');
+    })
+    it('should add element with default style after updating', () => {
+      
+      cy.get('.b-wrapper').click();
+      cy.get('#side-panel button').click(); // first button is the box-element
+
+      cy.get('.b-box').eq(0).should('have.css', 'minHeight', '50px');
+      cy.get('.b-box').eq(1).should('have.css', 'minHeight', '50px');
+      cy.get('.b-box').eq(2).should('have.css', 'minHeight', '100px');
+    })
+    it('should be able to delete the duplicated element', () => {
+
+      cy.get('.b-box').eq(1).trigger('mouseover');
+      cy.get('.b-box .b-action-remove').eq(1).click();
+
+      cy.get('.b-box').should('have.length', 1)
+      cy.get('.b-box').should('have.css', 'minHeight', '50px');
+    })
+    it('should be able to delete the root element after duplication', () => {
+
+      cy.get('.b-box').eq(0).trigger('mouseover');
+      cy.get('.b-box .b-action-remove').eq(0).click();
+
+      cy.get('.b-box').should('have.length', 1)
+      cy.get('.b-box').should('have.css', 'minHeight', '50px');
+    })
   })
 })
