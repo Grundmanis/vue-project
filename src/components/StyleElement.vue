@@ -15,5 +15,5 @@ export default {
 
 <template>
     <label>{{ name }}</label>
-    <input type="text" v-model="activeStore.updatedStyles[name]">
+    <input :class="`b-styled-element b-style-${name}`" type="text" v-model="activeStore.updatedStyles[name]">
 </template>

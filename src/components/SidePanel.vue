@@ -41,8 +41,8 @@
     </ul>
     <hr>
     <h4>Update styles</h4>
-    <div v-for="(style, index) in activeStore.updatedStyles" v-bind:key="index">
-      <StyleElement :name="index" />
+    <div v-for="(style, key, index) in activeStore.updatedStyles" v-bind:key="index">
+      <StyleElement :name="key.toString()" />
     </div>
     <hr>
   </div>

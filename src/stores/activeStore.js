@@ -1,5 +1,4 @@
-import { reactive, watch } from 'vue'
-import { elementsStore } from './elementsStore.js'
+import { reactive } from 'vue'
 
 export const activeStore = reactive({
   active: 1,
