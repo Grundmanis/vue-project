@@ -17,13 +17,12 @@ export default {
       isHover: false,
       config: {
         defaultStyles: {
-          height: 'auto',
           fontSize: '14px',
-          minHeight: '100px',
-          width: '100%',
-          display: 'block'
+          width: '100%'
           // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
-        }
+        },
+        text: 'Lorem ipsum dolor sit amet',
+        type: 'p'
       }
     }
   },
@@ -50,7 +49,7 @@ export default {
         return activeStore.updatedStyles
       }
 
-      return elementsStore.dom.children[elementData.key].config.styles
+      return elementsStore.dom.children[elementData.key].styles
     },
     isActive() {
       return activeStore.active === this.id ? 'active' : ''
@@ -62,13 +61,9 @@ export default {
       activeStore.active = this.id
     },
     getElement() {
-      console.log('seraching for id', this.id)
-      console.log('in elemenets', elementsStore.dom.children)
       for (const key in elementsStore.dom.children) {
-        console.log('checking key', key)
         const element = elementsStore.dom.children[key]
         if (element.id === this.id) {
-          console.log('found!', element)
           return {
             element,
             key
@@ -98,18 +93,21 @@ export default {
       }
     },
     duplicateElement() {
-      console.log('duplicate element', this.id)
       const elementData = this.getElement()
       if (!elementData) {
         return
       }
       const newId = elementsStore.incrementedId + 1
       elementsStore.incrementedId = newId
+
       const newStyles = JSON.parse(JSON.stringify(this.updatedStyles))
+
       const newElement = {
         id: newId,
         parentId: elementData.element.parentId,
-        config: { styles: newStyles },
+        config: {
+          styles: newStyles
+        },
         type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
       }
 
@@ -125,7 +123,7 @@ export default {
     v-on:mouseover="() => hover(true)"
     v-on:mouseout="() => hover(false)"
     v-on:click.self="activate"
-    :class="['b-element b-box', isActive, isHover ? 'hovered' : '']"
+    :class="['b-element b-text', isActive, isHover ? 'hovered' : '']"
   >
     <div class="b-actions-toolbar">
       <span>#{{ id }}</span>
@@ -140,12 +138,15 @@ export default {
       </button>
     </div>
 
-    <component
+    <!-- 
+      no child components for now, maybe only icons/span/small ?
+      <component
       v-for="element in filteredElements()"
       :is="element.type"
       v-bind:key="element.id"
       :id="element.id"
-    />
-    <slot></slot>
+    /> -->
+
+    <!-- no need to put anything inside <slot></slot> -->
   </div>
 </template>

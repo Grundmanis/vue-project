@@ -13,12 +13,14 @@ export default {
   data() {
     return {
       isHover: false,
-      defaultStyles: {
-        height: 'auto',
-        minHeight: '100vh',
-        width: '100%',
-        backgroundColor: 'rgb(235 235 235)'
-        // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
+      elementConfig: {
+        defaultStyles: {
+          height: 'auto',
+          minHeight: '100px',
+          width: '100%',
+          display: 'block'
+          // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
+        }
       }
     }
   },
@@ -27,13 +29,13 @@ export default {
       const styles =
         activeStore.active === this.id && Object.keys(activeStore.updatedStyles).length > 0
           ? activeStore.updatedStyles
-          : this.defaultStyles
+          : this.elementConfig.defaultStyles
 
       // TOOD: save all data in one place
       // This teeds for the duplicate action
       const elementData = this.getElement()
       if (elementData) {
-        elementsStore.dom.children[elementData.key].styles = styles
+        elementsStore.dom.children[elementData.key].config.styles = styles
       }
 
       return styles
@@ -89,11 +91,10 @@ export default {
       <span>#{{ id }}</span>
     </div>
     <component
-      :is="element.type"
       v-for="element in filteredElements()"
+      :is="element.type"
       v-bind:key="element.id"
       :id="element.id"
-      :type="element.type"
     />
     <slot></slot>
   </div>

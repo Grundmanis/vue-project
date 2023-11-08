@@ -5,6 +5,7 @@ export const elementsStore = reactive({
   dom: {
     id: 1,
     type: WrapperElement,
+    config: {},
     children: [
       //   {
       //   id: 2,
