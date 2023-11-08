@@ -12,12 +12,13 @@ import BoxElement from './BuildElements/BoxElement.vue'
 export default {
   methods: {
     addElement(component: typeof BoxElement) {
+
       const newId = elementsStore.incrementedId + 1 // ++
       elementsStore.incrementedId = newId
       const element = {
         type: shallowRef(component),
         id: newId,
-        parentId: activeStore.active,
+        parentId: activeStore.active
       }
       elementsStore.dom.children.push(element)
     }

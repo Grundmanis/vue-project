@@ -15,9 +15,9 @@ export default {
       isHover: false,
       defaultStyles: {
         height: 'auto',
-        minHeight: '100px',
+        minHeight: '100vh',
         width: '100%',
-        backgroundColor: 'rgb(235 235 235)',
+        backgroundColor: 'rgb(235 235 235)'
         // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
       }
     }
@@ -89,10 +89,11 @@ export default {
       <span>#{{ id }}</span>
     </div>
     <component
-      v-for="element in filteredElements()"
       :is="element.type"
+      v-for="element in filteredElements()"
       v-bind:key="element.id"
       :id="element.id"
+      :type="element.type"
     />
     <slot></slot>
   </div>
