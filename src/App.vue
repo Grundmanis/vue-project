@@ -1,16 +1,14 @@
 <script setup lang="ts">
-  import "./assets/main.css";
-  import SidePanel from "./components/SidePanel.vue";
-  import WorkArea from "./components/WorkArea.vue";
+import './assets/main.css'
+import SidePanel from './components/SidePanel.vue'
+import WorkArea from './components/WorkArea.vue'
 </script>
 
 <template>
-<div class="container-fluid">
-  <SidePanel />
-  <WorkArea />
-</div>
-
+  <div class="container-fluid">
+    <SidePanel />
+    <WorkArea />
+  </div>
 </template>
 
-<style>
-</style>
+<style></style>

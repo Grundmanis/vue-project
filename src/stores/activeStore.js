@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 
 export const activeStore = reactive({
   active: 1,
-  updatedStyles: {},
+  updatedStyles: {}
 })
 
 // watch(activeStore, (newStore) => {

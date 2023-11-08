@@ -1,35 +1,35 @@
- @import './base.css';
- 
- #side-panel {
+@import './base.css';
+
+#side-panel {
   position: fixed;
-  border:1px solid black;
+  border: 1px solid black;
   right: 0;
   top: 0;
   min-width: 400px;
   height: 100vh;
- }
- .showGrid .b-element {
+}
+.showGrid .b-element {
   border: 1px dotted #8f8f8f;
- }
- .b-element.hovered {
+}
+.b-element.hovered {
   border: 1px dashed green;
   padding-top: 15px;
- }
- .b-element.active {
+}
+.b-element.active {
   border: 1px dashed red;
- }
- .b-element .b-actions-toolbar {
+}
+.b-element .b-actions-toolbar {
   position: absolute;
   margin-left: 5px;
   margin-top: -15px;
   display: none;
   font-size: 12px;
   background-color: aquamarine;
- }
- .b-element .b-actions-toolbar span {
+}
+.b-element .b-actions-toolbar span {
   padding: 0 5px;
- }
+}
 
 .b-element.hovered > .b-actions-toolbar {
   display: block;
- }
+}
