@@ -4,7 +4,8 @@ describe('Sidebar', () => {
     cy.get('#side-panel button').click(); // first button is the box-element
     cy.get('#workarea .b-box').trigger('mouseover');
     cy.get('#workarea .b-box').contains('2');
-    cy.get('#workarea .b-box .b-action-remove').contains('x');
+    cy.get('#workarea .b-box .b-action-remove');
+    cy.get('#workarea .b-box .b-action-duplicate');
   })
   it('should see the config data of added element', () => {
     cy.visit('/')

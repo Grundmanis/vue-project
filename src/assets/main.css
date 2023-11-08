@@ -29,6 +29,9 @@
 .b-element .b-actions-toolbar span {
   padding: 0 5px;
 }
+.b-element .b-actions-toolbar svg {
+  width: 14px;
+}
 
 .b-element.hovered > .b-actions-toolbar {
   display: block;

@@ -86,7 +86,7 @@ export default {
     :class="['b-element b-wrapper', isActive, isHover ? 'hovered' : '']"
   >
     <div class="b-actions-toolbar">
-      <span>{{ id }}</span>
+      <span>#{{ id }}</span>
     </div>
     <component
       :is="element.type"
