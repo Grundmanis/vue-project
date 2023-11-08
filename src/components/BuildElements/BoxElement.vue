@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { activeStore } from '../../stores/activeStore.js'
-import { elementsStore } from '../../stores/elementsStore.js'
+  // @ts-ignore
+  import { activeStore } from '../../stores/activeStore.js'
+  // @ts-ignore
+  import { elementsStore } from '../../stores/elementsStore.js'
 </script>
 
 <script lang="ts">
-
-export default {
+  export default {
   props: {
     id: Number,
   },
@@ -23,7 +24,7 @@ export default {
   created() {
     const elementData = this.getElement();
     if (!elementData) {
-      console.log('no data?????');
+      console.error('no element data on created');
       return;
     }
     if (! elementsStore.dom.children[elementData.key].styles) {
@@ -32,11 +33,9 @@ export default {
   },
   computed: {
     updatedStyles() {
-      
-      console.log("styles updating");
       const elementData = this.getElement();
       if (!elementData) {
-        console.log("no dataata again??")
+      console.error('no element data on updatedStyles');
         return this.defaultStyles;;
       }
 
@@ -71,9 +70,6 @@ export default {
       this.isHover = !this.isHover;
     },
     filteredElements() {
-      if (this.id === undefined) {
-        return; // changes nothing
-      }
       let children = [];
         for (const element of elementsStore.dom.children) {
           if (element.parentId == this.id) {
@@ -83,11 +79,6 @@ export default {
       return children;
     },
     removeElement() {
-      if (this.id === 1) {
-        return; // not allowing to delete the dom
-        // TOOD: do not show the delete button
-      }
-
       // TODO: use getElement
       for (const key in elementsStore.dom.children) {
         const element = elementsStore.dom.children[key];

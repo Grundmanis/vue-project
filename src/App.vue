@@ -1,29 +1,13 @@
 <script setup lang="ts">
-import SidePanel from "./components/SidePanel.vue";
-import "./assets/main.css";
-import { elementsStore } from './stores/elementsStore.js'
-import WrapperVue from "./components/BElements/Wrapper.vue";
-</script>
-
-<script lang="ts">
-
-export default {
-    data() {
-        return {
-            showGrid: true,
-        };
-    },
-    components: { WrapperVue }
-}
-
+  import "./assets/main.css";
+  import SidePanel from "./components/SidePanel.vue";
+  import WorkArea from "./components/WorkArea.vue";
 </script>
 
 <template>
 <div class="container-fluid">
   <SidePanel />
-  <div :class="{ showGrid: showGrid, 'col': true}" id="workarea">
-    <WrapperVue :id="elementsStore.dom.id"></WrapperVue>
-  </div>
+  <WorkArea />
 </div>
 
 </template>
