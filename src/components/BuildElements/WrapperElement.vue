@@ -13,14 +13,12 @@ export default {
   data() {
     return {
       isHover: false,
-      elementConfig: {
-        defaultStyles: {
-          height: 'auto',
-          minHeight: '100px',
-          width: '100%',
-          display: 'block'
-          // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
-        }
+      defaultStyles: {
+        height: 'auto',
+        minHeight: '100px',
+        width: '100%',
+        display: 'block'
+        // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
       }
     }
   },
@@ -29,13 +27,13 @@ export default {
       const styles =
         activeStore.active === this.id && Object.keys(activeStore.updatedStyles).length > 0
           ? activeStore.updatedStyles
-          : this.elementConfig.defaultStyles
+          : this.defaultStyles
 
       // TOOD: save all data in one place
       // This teeds for the duplicate action
       const elementData = this.getElement()
       if (elementData) {
-        elementsStore.dom.children[elementData.key].config.styles = styles
+        elementsStore.dom.children[elementData.key].styles = styles
       }
 
       return styles

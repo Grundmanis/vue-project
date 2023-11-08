@@ -15,15 +15,13 @@ export default {
   data() {
     return {
       isHover: false,
-      config: {
-        defaultStyles: {
-          height: 'auto',
-          fontSize: '14px',
-          minHeight: '100px',
-          width: '100%',
-          display: 'block'
-          // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
-        }
+      defaultStyles: {
+        height: 'auto',
+        fontSize: '14px',
+        minHeight: '100px',
+        width: '100%',
+        display: 'block'
+        // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
       }
     }
   },
@@ -33,8 +31,8 @@ export default {
       console.error('no element data on created')
       return
     }
-    if (!elementsStore.dom.children[elementData.key].config.styles) {
-      elementsStore.dom.children[elementData.key].config.styles = this.config.defaultStyles
+    if (!elementsStore.dom.children[elementData.key].styles) {
+      elementsStore.dom.children[elementData.key].styles = this.defaultStyles
     }
   },
   computed: {
@@ -42,11 +40,11 @@ export default {
       const elementData = this.getElement()
       if (!elementData) {
         console.error('no element data on updatedStyles')
-        return this.config.defaultStyles
+        return this.defaultStyles
       }
 
       if (activeStore.active === this.id && Object.keys(activeStore.updatedStyles).length > 0) {
-        elementsStore.dom.children[elementData.key].config.styles = activeStore.updatedStyles
+        elementsStore.dom.children[elementData.key].styles = activeStore.updatedStyles
         return activeStore.updatedStyles
       }
 
@@ -62,13 +60,9 @@ export default {
       activeStore.active = this.id
     },
     getElement() {
-      console.log('seraching for id', this.id)
-      console.log('in elemenets', elementsStore.dom.children)
       for (const key in elementsStore.dom.children) {
-        console.log('checking key', key)
         const element = elementsStore.dom.children[key]
         if (element.id === this.id) {
-          console.log('found!', element)
           return {
             element,
             key
@@ -98,7 +92,6 @@ export default {
       }
     },
     duplicateElement() {
-      console.log('duplicate element', this.id)
       const elementData = this.getElement()
       if (!elementData) {
         return

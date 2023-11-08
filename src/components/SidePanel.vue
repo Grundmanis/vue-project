@@ -18,7 +18,6 @@ export default {
         type: shallowRef(component),
         id: newId,
         parentId: activeStore.active,
-        config: {}
       }
       elementsStore.dom.children.push(element)
     }
