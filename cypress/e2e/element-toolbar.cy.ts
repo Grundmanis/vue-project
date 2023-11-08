@@ -51,7 +51,7 @@ describe('Toolbar', () => {
     cy.get('.b-box').eq(1).contains('6');
   })
 
-  describe.only('Duplicate', () => {
+  describe('Duplicate', () => {
 
     beforeEach(() => {
       cy.visit('/')

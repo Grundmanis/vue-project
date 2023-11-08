@@ -17,7 +17,7 @@ export default {
         height: 'auto',
         minHeight: '100px',
         width: '100%',
-        display: 'block'
+        backgroundColor: 'rgb(235 235 235)',
         // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
       }
     }
