@@ -1,11 +1,11 @@
 import { reactive } from 'vue'
-import Box from '../components/BElements/Box.vue';
+import WrapperElement from '../components/BuildElements/WrapperElement.vue';
 
 export const elementsStore = reactive({
   dom: 
     {
     id: 1,
-    type: Box,
+    type: WrapperElement,
     children: [
     //   {
     //   id: 2,

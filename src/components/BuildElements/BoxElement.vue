@@ -66,8 +66,8 @@
         }
       }
     },
-    hover() {
-      this.isHover = !this.isHover;
+    hover(isHover: boolean) {
+      this.isHover = isHover;
     },
     filteredElements() {
       let children = [];
@@ -122,7 +122,7 @@
 
 
 <template>
-  <div :style="updatedStyles" v-on:mouseover="hover" v-on:mouseout="hover" v-on:click.self="activate" :class="['b-element b-box', isActive, isHover ? 'hovered': '']">
+  <div :style="updatedStyles" v-on:mouseover="() => hover(true)" v-on:mouseout="() => hover(false)" v-on:click.self="activate" :class="['b-element b-box', isActive, isHover ? 'hovered': '']">
     <div class="b-actions-toolbar">
       <span>{{ id }}</span>
       <button class="b-action-remove" v-on:click.self="removeElement">x</button>
