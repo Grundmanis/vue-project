@@ -46,6 +46,7 @@ export default {
     activate() {
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
+      activeStore.config = {}
     },
     getElement() {
       for (const key in elementsStore.dom.children) {

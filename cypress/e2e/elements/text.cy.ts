@@ -14,7 +14,6 @@ describe('Text Element', () => {
     })
     it('should see the config data of text element', () => {
       cy.get('.b-text').trigger('click');
-      cy.get('#side-panel').contains('fontSize');
       cy.get('#side-panel').contains('color');
       cy.get('#side-panel').contains('Selected element #2');
       cy.get('#side-panel').contains('Change the text');

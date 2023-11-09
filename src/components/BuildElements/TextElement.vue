@@ -16,7 +16,6 @@ export default {
     return {
       isHover: false,
       defaultStyles: {
-        fontSize: '14px',
         width: 'auto',
         padding: '0',
         margin: '0',
@@ -25,7 +24,7 @@ export default {
       },
       config: {
         text: 'lorem ipsum valis margulis',
-        type: 'p'
+        tag: 'p'
       }
     }
   },
@@ -133,7 +132,7 @@ export default {
         styles: newStyles,
         config: {
           text: newConfig.text,
-          type: newConfig.type
+          tag: newConfig.tag
         },
         type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
       }
@@ -144,7 +143,9 @@ export default {
 </script>
 
 <template>
-  <div
+
+  <p
+    v-if="updatedConfig.tag === 'p'"
     :style="updatedStyles"
     v-on:mouseover="() => hover(true)"
     v-on:mouseout="() => hover(false)"
@@ -178,5 +179,43 @@ export default {
     <!-- 
       No slots needed
       <slot></slot> -->
-  </div>
+    </p>
+    
+  <h1
+    v-if="updatedConfig.tag === 'h1'"
+    :style="updatedStyles"
+    v-on:mouseover="() => hover(true)"
+    v-on:mouseout="() => hover(false)"
+    v-on:click.self="activate"
+    :class="['b-element b-text', isActive, isHover ? 'hovered' : '']"
+  >
+    <div class="b-actions-toolbar">
+      <span>#{{ id }}</span>
+      <button title="Remove" class="b-action-remove" v-on:click="removeElement">
+        <TrashIcon />
+      </button>
+      <button title="Duplicate" class="b-action-duplicate" v-on:click="duplicateElement">
+        <DocumentDuplicateIcon />
+      </button>
+      <button title="Drag" class="b-action-drag">
+        <ArrowsPointingOutIcon />
+      </button>
+    </div>
+
+    {{ updatedConfig.text }}
+
+    <!-- 
+      No child components I think, maybe later only if icon/small
+      <component
+      :is="element.type"
+      v-for="element in filteredElements()"
+      v-bind:key="element.id"
+      :id="element.id"
+      :type="element.type"
+    /> -->
+    <!-- 
+      No slots needed
+      <slot></slot> -->
+    </h1>
+
 </template>
