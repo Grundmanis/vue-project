@@ -1,10 +1,6 @@
 <script setup lang="ts">
 // @ts-ignore
-import { getElement } from '@/composable/computed';
-// @ts-ignore
-import { activeStore } from '../../stores/activeStore.js'
-// @ts-ignore
-import { elementsStore } from '../../stores/elementsStore.js'
+import { getConfig } from '@/composable/computed'
 import ElementTemplate from './ElementTemplate.vue'
 </script>
 
@@ -23,33 +19,21 @@ export default {
       },
       config: {
         text: 'lorem ipsum valis margulis',
-        tag: 'p'
+        tag: 'p' // TODO: write tests 
       }
     }
-  },
-  computed: {
-    updatedConfig() {
-      const elementData = getElement(this.id)
-      if (!elementData) {
-        console.error('no element data on updatedStyles')
-        return this.config;
-      }
-
-      if (activeStore.active === this.id && Object.keys(activeStore.config).length) {
-        elementsStore.dom.children[elementData.key].config = activeStore.config
-        return activeStore.config
-      }
-
-      return elementsStore.dom.children[elementData.key].config
-    },
-  },
+  }
 }
 </script>
 
 <template>
-  
-  <ElementTemplate :id="id" :tag="updatedConfig.tag" className="b-text" :elementStyles="defaultStyles" :elementConfig="config">
-    {{ updatedConfig.text }}
+  <ElementTemplate
+    :id="id"
+    className="b-text"
+    :elementStyles="defaultStyles"
+    :elementConfig="config"
+    :tag="config.tag"
+  >
+    {{ getConfig(id, 'text', config.text) }}
   </ElementTemplate>
-
 </template>

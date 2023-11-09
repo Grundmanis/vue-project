@@ -1,7 +1,6 @@
 <script setup lang="ts">
-// @ts-ignore
-import { elementsStore } from '../../stores/elementsStore.js'
 import ElementTemplate from './ElementTemplate.vue'
+import { filteredElements } from '@/composable/computed'
 </script>
 
 <script lang="ts">
@@ -19,17 +18,6 @@ export default {
         display: 'block'
       }
     }
-  },
-  methods: {
-    filteredElements() {
-      let children = []
-      for (const element of elementsStore.dom.children) {
-        if (element.parentId == this.id) {
-          children.push(element)
-        }
-      }
-      return children
-    }
   }
 }
 </script>
@@ -37,7 +25,7 @@ export default {
 <template>
   <ElementTemplate :id="id" tag="div" className="b-box" :elementStyles="defaultStyles">
     <component
-      v-for="element in filteredElements()"
+      v-for="element in filteredElements(id)"
       :is="element.type"
       v-bind:key="element.id"
       :id="element.id"
