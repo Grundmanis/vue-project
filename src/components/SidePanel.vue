@@ -53,12 +53,12 @@ export default {
         </div>
       <hr />
     </div>
-    <div v-if="activeStore.config?.text">
+    <div v-if="activeStore.config?.text !== undefined">
       <h4>Change the text</h4>
         <input type="text" class="b-text-element" v-model="activeStore.config.text" />
       <hr />
     </div>
-    <div v-if="activeStore.config?.type">
+    <div v-if="activeStore.config?.type !== undefined">
       <h4>Change the type</h4>
         <input type="text" class="b-type-element" v-model="activeStore.config.type" />
       <hr />
