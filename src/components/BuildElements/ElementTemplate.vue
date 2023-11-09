@@ -5,6 +5,7 @@ import { activeStore } from '../../stores/activeStore.js'
 // @ts-ignore
 import { elementsStore } from '../../stores/elementsStore.js'
 import { DocumentDuplicateIcon, TrashIcon, ArrowsPointingOutIcon } from '@heroicons/vue/24/outline'
+import { getElement } from '@/composable/computed';
 </script>
 
 <script lang="ts">
@@ -22,7 +23,7 @@ export default {
     }
   },
   created() {
-    const elementData = this.getElement()
+    const elementData = getElement(this.id)
     if (!elementData) {
       console.error('no element data on created')
       return
@@ -38,7 +39,7 @@ export default {
   },
   computed: {
     updatedStyles() {
-      const elementData = this.getElement()
+      const elementData = getElement(this.id)
       if (!elementData) {
         console.error('no element data on updatedStyles')
         return this.elementStyles
@@ -54,7 +55,7 @@ export default {
     updatedConfig() {
       // TODO: not every element has config
       // return empty object
-      const elementData = this.getElement()
+      const elementData = getElement(this.id)
       if (!elementData) {
         console.error('no element data on updatedStyles')
         return this.elementConfig;
@@ -78,17 +79,6 @@ export default {
       activeStore.active = this.id
       activeStore.config = config
     },
-    getElement() {
-      for (const key in elementsStore.dom.children) {
-        const element = elementsStore.dom.children[key]
-        if (element.id === this.id) {
-          return {
-            element,
-            key
-          }
-        }
-      }
-    },
     hover(isHover: boolean) {
       this.isHover = isHover
     },
@@ -102,16 +92,15 @@ export default {
       return children
     },
     removeElement() {
-      // TODO: use getElement
-      for (const key in elementsStore.dom.children) {
-        const element = elementsStore.dom.children[key]
-        if (element.id === this.id) {
-          elementsStore.dom.children.splice(key, 1)
-        }
+      
+      const elementData = getElement(this.id)
+      if (!elementData) {
+        return
       }
-    },
+        elementsStore.dom.children.splice(elementData.key, 1)
+      },
     duplicateElement() {
-      const elementData = this.getElement()
+      const elementData = getElement(this.id)
       if (!elementData) {
         return
       }

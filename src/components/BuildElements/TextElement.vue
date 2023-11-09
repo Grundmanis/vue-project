@@ -1,5 +1,7 @@
 <script setup lang="ts">
 // @ts-ignore
+import { getElement } from '@/composable/computed';
+// @ts-ignore
 import { activeStore } from '../../stores/activeStore.js'
 // @ts-ignore
 import { elementsStore } from '../../stores/elementsStore.js'
@@ -27,7 +29,7 @@ export default {
   },
   computed: {
     updatedConfig() {
-      const elementData = this.getElement()
+      const elementData = getElement(this.id)
       if (!elementData) {
         console.error('no element data on updatedStyles')
         return this.config;
@@ -41,19 +43,6 @@ export default {
       return elementsStore.dom.children[elementData.key].config
     },
   },
-  methods: {
-    getElement() {
-      for (const key in elementsStore.dom.children) {
-        const element = elementsStore.dom.children[key]
-        if (element.id === this.id) {
-          return {
-            element,
-            key
-          }
-        }
-      }
-    },
-  }
 }
 </script>
 
