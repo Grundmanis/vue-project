@@ -41,9 +41,9 @@ export default {
       <li>
         <button v-on:click="addElement(BoxElement)">Box</button>
       </li>
-      <!-- <li>
+      <li>
         <button v-on:click="addElement(TextElement)">Text</button>
-      </li> -->
+      </li>
     </ul>
     <hr />
     <div>
@@ -60,7 +60,7 @@ export default {
     </div>
     <div v-if="activeStore.config?.type">
       <h4>Change the type</h4>
-        <input type="text" class="b-text-element" v-model="activeStore.config.type" />
+        <input type="text" class="b-type-element" v-model="activeStore.config.type" />
       <hr />
     </div>
   </div>

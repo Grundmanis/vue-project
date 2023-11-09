@@ -38,9 +38,8 @@ export default {
     if (!elementsStore.dom.children[elementData.key].styles) {
       elementsStore.dom.children[elementData.key].styles = this.defaultStyles
     }
-    console.log("elementsStore.dom.children[elementData.key]", elementsStore.dom.children[elementData.key]);
     if (!Object.keys(elementsStore.dom.children[elementData.key].config).length) {
-      console.log("updated config", this.config);
+      console.log("setting default config", elementsStore.dom.children[elementData.key].config);
       elementsStore.dom.children[elementData.key].config = this.config
     }
   },
@@ -59,19 +58,21 @@ export default {
 
       return elementsStore.dom.children[elementData.key].styles
     },
-    updatedText() {
+    updatedConfig() {
       const elementData = this.getElement()
       if (!elementData) {
         console.error('no element data on updatedStyles')
         return this.defaultStyles
       }
 
-      if (activeStore.active === this.id && activeStore.config.text) {
-        elementsStore.dom.children[elementData.key].config.text = activeStore.config.text
-        return activeStore.config.text
+      console.log("updated config element", elementData);
+
+      if (activeStore.active === this.id && Object.keys(activeStore.config).length) {
+        elementsStore.dom.children[elementData.key].config = activeStore.config
+        return activeStore.config
       }
 
-      return elementsStore.dom.children[elementData.key].config.text
+      return elementsStore.dom.children[elementData.key].config
     },
     isActive() {
       return activeStore.active === this.id ? 'active' : ''
@@ -79,9 +80,11 @@ export default {
   },
   methods: {
     activate() {
+      const config = JSON.parse(JSON.stringify(this.updatedConfig)); // TODO: DOES NOT WORK
+      console.log("activate, set config", config)
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
-      activeStore.config = this.config // TODO change config
+      activeStore.config = config
     },
     getElement() {
       for (const key in elementsStore.dom.children) {
@@ -123,24 +126,18 @@ export default {
           const newId = elementsStore.incrementedId+1;
           elementsStore.incrementedId = newId;
           const newStyles = JSON.parse(JSON.stringify(this.updatedStyles));
-          const newText = JSON.parse(JSON.stringify(this.updatedText));
-          // const newElement = {
-          //   id: newId,
-          //   parentId: elementData.element.parentId,
-          //   styles: newStyles,
-          //   type: shallowRef(BoxElement)
-          // }
+          const newConfig = this.updatedConfig // issue with ref
           const newElement = {
             id: newId,
             parentId: elementData.element.parentId,
             styles: newStyles,
             config: {
-              text: newText,
-              type: 'p',
+              text: newConfig.text,
+              type: newConfig.type,
             },
             type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
           }
-          elementsStore.dom.children.splice(elementData.key+1, 0, newElement);
+          elementsStore.dom.children.splice(elementData.key, 0, newElement);
     }
   }
 }
@@ -167,8 +164,7 @@ export default {
       </button>
     </div>
 
-
-    {{ updatedText }}
+    {{ updatedConfig.text }}
 
     <!-- 
       No child components I think, maybe later only if icon/small
