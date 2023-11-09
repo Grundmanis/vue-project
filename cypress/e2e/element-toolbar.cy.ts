@@ -132,7 +132,7 @@ describe('Toolbar', () => {
       cy.get('.b-box').eq(0).should('have.css', 'minHeight', '50px');
       cy.get('.b-box').eq(1).should('have.css', 'minHeight', '20px');
       cy.get('.b-box').eq(2).should('have.css', 'minHeight', '20px');
-      cy.get('.b-box').eq(2).should('have.css', 'minHeight', '50px');
+      cy.get('.b-box').eq(3).should('have.css', 'minHeight', '50px');
 
     })
   })
