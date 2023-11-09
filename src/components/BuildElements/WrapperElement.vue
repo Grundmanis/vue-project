@@ -23,7 +23,7 @@ export default {
 </script>
 
 <template>
-  <ElementTemplate :id="id" tag="div" className="b-wrapper" :elementStyles="defaultStyles">
+  <ElementTemplate :id="id" tag="section" className="b-wrapper" :elementStyles="defaultStyles">
     <component
       v-for="element in filteredElements(id)"
       :is="element.type"

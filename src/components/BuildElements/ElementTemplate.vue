@@ -118,7 +118,7 @@ export default {
 
 <template>
   <component
-    :is="tag || updatedConfig.tag"
+    :is="updatedConfig?.tag || tag" 
     :style="updatedStyles"
     v-on:mouseover="() => hover(true)"
     v-on:mouseout="() => hover(false)"

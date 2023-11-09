@@ -19,7 +19,7 @@ export default {
       },
       config: {
         text: 'lorem ipsum valis margulis',
-        tag: 'p' // TODO: write tests 
+        tag: 'p' // TODO: write tests for tag
       }
     }
   }
