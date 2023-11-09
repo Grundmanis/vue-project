@@ -16,12 +16,16 @@ export default {
     return {
       isHover: false,
       defaultStyles: {
-        height: 'auto',
         fontSize: '14px',
-        minHeight: '100px',
-        width: '100%',
-        display: 'block'
+        width: 'auto',
+        padding: '0',
+        margin: '0',
+        color: '#000',
         // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
+      },
+      config: {
+        text: 'lorem ipsum valis margulis',
+        type: 'p',
       }
     }
   },
@@ -33,6 +37,11 @@ export default {
     }
     if (!elementsStore.dom.children[elementData.key].styles) {
       elementsStore.dom.children[elementData.key].styles = this.defaultStyles
+    }
+    console.log("elementsStore.dom.children[elementData.key]", elementsStore.dom.children[elementData.key]);
+    if (!Object.keys(elementsStore.dom.children[elementData.key].config).length) {
+      console.log("updated config", this.config);
+      elementsStore.dom.children[elementData.key].config = this.config
     }
   },
   computed: {
@@ -50,6 +59,20 @@ export default {
 
       return elementsStore.dom.children[elementData.key].styles
     },
+    updatedText() {
+      const elementData = this.getElement()
+      if (!elementData) {
+        console.error('no element data on updatedStyles')
+        return this.defaultStyles
+      }
+
+      if (activeStore.active === this.id && activeStore.config.text) {
+        elementsStore.dom.children[elementData.key].config.text = activeStore.config.text
+        return activeStore.config.text
+      }
+
+      return elementsStore.dom.children[elementData.key].config.text
+    },
     isActive() {
       return activeStore.active === this.id ? 'active' : ''
     }
@@ -58,6 +81,7 @@ export default {
     activate() {
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
+      activeStore.config = this.config // TODO change config
     },
     getElement() {
       for (const key in elementsStore.dom.children) {
@@ -99,6 +123,7 @@ export default {
           const newId = elementsStore.incrementedId+1;
           elementsStore.incrementedId = newId;
           const newStyles = JSON.parse(JSON.stringify(this.updatedStyles));
+          const newText = JSON.parse(JSON.stringify(this.updatedText));
           // const newElement = {
           //   id: newId,
           //   parentId: elementData.element.parentId,
@@ -109,9 +134,13 @@ export default {
             id: newId,
             parentId: elementData.element.parentId,
             styles: newStyles,
+            config: {
+              text: newText,
+              type: 'p',
+            },
             type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
           }
-          elementsStore.dom.children.splice(elementData.key, 0, newElement);
+          elementsStore.dom.children.splice(elementData.key+1, 0, newElement);
     }
   }
 }
@@ -123,7 +152,7 @@ export default {
     v-on:mouseover="() => hover(true)"
     v-on:mouseout="() => hover(false)"
     v-on:click.self="activate"
-    :class="['b-element b-box', isActive, isHover ? 'hovered' : '']"
+    :class="['b-element b-text', isActive, isHover ? 'hovered' : '']"
   >
     <div class="b-actions-toolbar">
       <span>#{{ id }}</span>
@@ -138,13 +167,20 @@ export default {
       </button>
     </div>
 
-    <component
+
+    {{ updatedText }}
+
+    <!-- 
+      No child components I think, maybe later only if icon/small
+      <component
       :is="element.type"
       v-for="element in filteredElements()"
       v-bind:key="element.id"
       :id="element.id"
       :type="element.type"
-    />
-    <slot></slot>
+    /> -->
+    <!-- 
+      No slots needed
+      <slot></slot> -->
   </div>
 </template>

@@ -116,5 +116,24 @@ describe('Toolbar', () => {
       cy.get('.b-box').should('have.length', 1)
       cy.get('.b-box').should('have.css', 'minHeight', '50px');
     })
+    it('should correctly position the new duplicated element', () => {
+
+      cy.get('.b-box').eq(1).trigger('mouseover');
+      cy.get('.b-box .b-action-duplicate').eq(1).click();
+    
+      cy.get('.b-box').eq(1).click()
+      
+      cy.get('.b-style-minHeight').clear();
+      cy.get('.b-style-minHeight').type('20px');
+
+      cy.get('.b-box').eq(1).trigger('mouseover');
+      cy.get('.b-box .b-action-duplicate').eq(1).click();
+
+      cy.get('.b-box').eq(0).should('have.css', 'minHeight', '50px');
+      cy.get('.b-box').eq(1).should('have.css', 'minHeight', '20px');
+      cy.get('.b-box').eq(2).should('have.css', 'minHeight', '20px');
+      cy.get('.b-box').eq(2).should('have.css', 'minHeight', '50px');
+
+    })
   })
 })
