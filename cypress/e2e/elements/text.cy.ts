@@ -35,6 +35,13 @@ describe('Text Element', () => {
       cy.get('.b-text-element').type('Hello');
       cy.get('.b-text').contains('Hello')
     })
+    it('should add multiple elements', () => {
+      cy.get('#side-panel button').eq(1).click();
+      cy.get('#side-panel button').eq(1).click();
+      cy.get('#side-panel button').eq(1).click();
+      cy.get('#side-panel button').eq(1).click();
+      cy.get('.b-wrapper > .b-text').should('have.length', 5)
+    })
   });
 
   describe('Delete', () => {
