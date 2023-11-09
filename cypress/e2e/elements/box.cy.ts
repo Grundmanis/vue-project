@@ -49,7 +49,6 @@ describe('Box Element', () => {
       cy.get('#workarea .b-box .b-box .b-box');
     })
   });
-
   
   describe('Delete', () => {
   
@@ -106,8 +105,6 @@ describe('Box Element', () => {
       cy.get('.b-box').eq(1).contains('6');
     })
   });
-
-  
 
   describe('Duplicate', () => {
     
@@ -191,7 +188,6 @@ describe('Box Element', () => {
       cy.get('.b-box').eq(1).should('have.css', 'minHeight', '20px');
       cy.get('.b-box').eq(2).should('have.css', 'minHeight', '20px');
       cy.get('.b-box').eq(3).should('have.css', 'minHeight', '50px');
-
     })
   });
 })

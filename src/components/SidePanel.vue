@@ -13,7 +13,6 @@ import TextElement from './BuildElements/TextElement.vue'
 export default {
   methods: {
     addElement(component: unknown) {
-
       const newId = elementsStore.incrementedId + 1 // ++
       elementsStore.incrementedId = newId
       const element = {
@@ -39,28 +38,28 @@ export default {
     <h4>Insert element</h4>
     <ul>
       <li>
-        <button v-on:click="addElement(BoxElement)">Box</button>
+        <button id="b-add-box" v-on:click="addElement(BoxElement)">Box</button>
       </li>
       <li>
-        <button v-on:click="addElement(TextElement)">Text</button>
+        <button id="b-add-text" v-on:click="addElement(TextElement)">Text</button>
       </li>
     </ul>
     <hr />
     <div>
       <h4>Update styles</h4>
-        <div v-for="(style, key, index) in activeStore.updatedStyles" v-bind:key="index">
-          <StyleElement :name="key.toString()" />
-        </div>
+      <div v-for="(style, key, index) in activeStore.updatedStyles" v-bind:key="index">
+        <StyleElement :name="key.toString()" />
+      </div>
       <hr />
     </div>
     <div v-if="activeStore.config?.text !== undefined">
       <h4>Change the text</h4>
-        <input type="text" class="b-text-element" v-model="activeStore.config.text" />
+      <input type="text" class="b-text-element" v-model="activeStore.config.text" />
       <hr />
     </div>
     <div v-if="activeStore.config?.type !== undefined">
       <h4>Change the type</h4>
-        <input type="text" class="b-type-element" v-model="activeStore.config.type" />
+      <input type="text" class="b-type-element" v-model="activeStore.config.type" />
       <hr />
     </div>
   </div>

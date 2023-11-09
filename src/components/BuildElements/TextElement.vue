@@ -20,12 +20,12 @@ export default {
         width: 'auto',
         padding: '0',
         margin: '0',
-        color: '#000',
+        color: '#000'
         // backgroundImage: "url('https://www.petage.com/wp-content/uploads/2019/09/Depositphotos_74974941_xl-2015-e1569443284386.jpg')",
       },
       config: {
         text: 'lorem ipsum valis margulis',
-        type: 'p',
+        type: 'p'
       }
     }
   },
@@ -39,7 +39,7 @@ export default {
       elementsStore.dom.children[elementData.key].styles = this.defaultStyles
     }
     if (!Object.keys(elementsStore.dom.children[elementData.key].config).length) {
-      console.log("setting default config", elementsStore.dom.children[elementData.key].config);
+      console.log('setting default config', elementsStore.dom.children[elementData.key].config)
       elementsStore.dom.children[elementData.key].config = this.config
     }
   },
@@ -65,7 +65,7 @@ export default {
         return this.defaultStyles
       }
 
-      console.log("updated config element", elementData);
+      console.log('updated config element', elementData)
 
       if (activeStore.active === this.id && Object.keys(activeStore.config).length) {
         elementsStore.dom.children[elementData.key].config = activeStore.config
@@ -80,8 +80,8 @@ export default {
   },
   methods: {
     activate() {
-      const config = JSON.parse(JSON.stringify(this.updatedConfig)); // TODO: DOES NOT WORK
-      console.log("activate, set config", config)
+      const config = JSON.parse(JSON.stringify(this.updatedConfig)) // TODO: DOES NOT WORK
+      console.log('activate, set config', config)
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
       activeStore.config = config
@@ -119,25 +119,25 @@ export default {
       }
     },
     duplicateElement() {
-      const elementData = this.getElement();
-          if (!elementData) {
-            return;
-          }
-          const newId = elementsStore.incrementedId+1;
-          elementsStore.incrementedId = newId;
-          const newStyles = JSON.parse(JSON.stringify(this.updatedStyles));
-          const newConfig = this.updatedConfig // issue with ref
-          const newElement = {
-            id: newId,
-            parentId: elementData.element.parentId,
-            styles: newStyles,
-            config: {
-              text: newConfig.text,
-              type: newConfig.type,
-            },
-            type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
-          }
-          elementsStore.dom.children.splice(elementData.key, 0, newElement);
+      const elementData = this.getElement()
+      if (!elementData) {
+        return
+      }
+      const newId = elementsStore.incrementedId + 1
+      elementsStore.incrementedId = newId
+      const newStyles = JSON.parse(JSON.stringify(this.updatedStyles))
+      const newConfig = this.updatedConfig // issue with ref
+      const newElement = {
+        id: newId,
+        parentId: elementData.element.parentId,
+        styles: newStyles,
+        config: {
+          text: newConfig.text,
+          type: newConfig.type
+        },
+        type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
+      }
+      elementsStore.dom.children.splice(elementData.key, 0, newElement)
     }
   }
 }

@@ -92,26 +92,26 @@ export default {
       }
     },
     duplicateElement() {
-      const elementData = this.getElement();
-          if (!elementData) {
-            return;
-          }
-          const newId = elementsStore.incrementedId+1;
-          elementsStore.incrementedId = newId;
-          const newStyles = JSON.parse(JSON.stringify(this.updatedStyles));
-          // const newElement = {
-          //   id: newId,
-          //   parentId: elementData.element.parentId,
-          //   styles: newStyles,
-          //   type: shallowRef(BoxElement)
-          // }
-          const newElement = {
-            id: newId,
-            parentId: elementData.element.parentId,
-            styles: newStyles,
-            type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
-          }
-          elementsStore.dom.children.splice(elementData.key, 0, newElement);
+      const elementData = this.getElement()
+      if (!elementData) {
+        return
+      }
+      const newId = elementsStore.incrementedId + 1
+      elementsStore.incrementedId = newId
+      const newStyles = JSON.parse(JSON.stringify(this.updatedStyles))
+      // const newElement = {
+      //   id: newId,
+      //   parentId: elementData.element.parentId,
+      //   styles: newStyles,
+      //   type: shallowRef(BoxElement)
+      // }
+      const newElement = {
+        id: newId,
+        parentId: elementData.element.parentId,
+        styles: newStyles,
+        type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
+      }
+      elementsStore.dom.children.splice(elementData.key, 0, newElement)
     }
   }
 }
