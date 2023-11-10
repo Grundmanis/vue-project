@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// @ts-ignore
-import { activeStore } from '../stores/activeStore.js'
+import { activeStore } from '../stores/activeStore'
 </script>
 
 <template>

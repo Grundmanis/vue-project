@@ -1,8 +1,6 @@
 <script setup lang="ts">
-  // @ts-ignore
-  import { elementsStore } from '../stores/elementsStore.js'
-  // @ts-ignore
-  import { activeStore } from '../stores/activeStore.js'
+  import { elementsStore } from '../stores/elementsStore'
+  import { activeStore } from '../stores/activeStore'
   import ElementStyles from './ElementStyles.vue'
   import ElementConfig from './ElementConfig.vue'
   import ElementsToInsert from './ElementsToInsert.vue'

@@ -1,9 +1,7 @@
 <script setup lang="ts">
   import { shallowRef } from 'vue'
-  // @ts-ignore
-  import { elementsStore } from '../stores/elementsStore.js'
-  // @ts-ignore
-  import { activeStore } from '../stores/activeStore.js'
+  import { elementsStore } from '../stores/elementsStore'
+  import { activeStore } from '../stores/activeStore'
   import BoxElement from './BuildElements/BoxElement.vue'
   import TextElement from './BuildElements/TextElement.vue'
 </script>

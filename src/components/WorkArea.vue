@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// @ts-ignore
-import { elementsStore } from '../stores/elementsStore.js'
+import { elementsStore } from '../stores/elementsStore'
 </script>
 
 <template>

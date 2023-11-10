@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// @ts-ignore
 import { getConfig } from '@/composable/computed'
 import ElementTemplate from './ElementTemplate.vue'
 </script>

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { shallowRef } from 'vue'
-// @ts-ignore
-import { activeStore } from '../../stores/activeStore.js'
-// @ts-ignore
-import { elementsStore } from '../../stores/elementsStore.js'
+import { activeStore } from '../../stores/activeStore'
+import { elementsStore } from '../../stores/elementsStore'
 import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { getElement } from '@/composable/computed'
 </script>

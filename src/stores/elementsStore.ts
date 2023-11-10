@@ -1,10 +1,10 @@
-import { reactive } from 'vue'
+import { reactive, shallowRef } from 'vue'
 import WrapperElement from '../components/BuildElements/WrapperElement.vue'
 
 export const elementsStore = reactive({
   dom: {
     id: 1,
-    type: WrapperElement,
+    type: shallowRef(WrapperElement),
     children: [
       //   {
       //   id: 2,
@@ -29,5 +29,8 @@ export const elementsStore = reactive({
     ]
   },
   showGrid: true,
-  incrementedId: 1
+  incrementedId: 1,
+  getConfig: () => {
+    
+  }
 })

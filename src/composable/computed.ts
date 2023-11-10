@@ -1,7 +1,5 @@
 import { computed } from 'vue'
-// @ts-ignore
-import { activeStore } from '../stores/activeStore.js'
-// @ts-ignore
+import { activeStore } from '../stores/activeStore'
 import { elementsStore } from '../stores/elementsStore.js'
 
 // TODO: refactor and then delete 
