@@ -7,7 +7,7 @@ export default {
   props: {
     id: {
       type: Number,
-      required: true,
+      required: true
     }
   },
   data() {
@@ -16,15 +16,15 @@ export default {
         id: this.id,
         isNestable: true,
         tag: 'div',
-        className: "b-box",
+        className: 'b-box',
         elementStyles: {
           height: 'auto',
           fontSize: '14px',
           minHeight: '100px',
           width: '100%',
           display: 'block'
-        },
-      },
+        }
+      }
     }
   }
 }

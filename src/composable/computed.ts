@@ -1,10 +1,17 @@
 import { computed } from 'vue'
 import { activeStore } from '../stores/activeStore'
-import { elementsStore, type DomElement, type DomElementConfig } from '../stores/elementsStore.js'
+import { elementsStore } from '../stores/elementsStore.js'
+import type { DomElementConfig } from '@/interfaces/DomElementConfig'
+import type { DomElement } from '@/interfaces/DomElement'
 
-// TODO: refactor and then delete 
-export function getConfig(id: number | undefined, key: keyof DomElementConfig, defaultValue: unknown) {
+// TODO: refactor and then delete
+export function getConfig(
+  id: number | undefined,
+  key: keyof DomElementConfig,
+  defaultValue: unknown
+) {
   return computed(() => {
+    console.log("get element config", id);
     const elementData = getElement(id)
     if (!elementData) {
       console.error('no element data on updatedStyles')
@@ -20,16 +27,19 @@ export function getConfig(id: number | undefined, key: keyof DomElementConfig, d
   })
 }
 
-export function getElement(id: number | undefined): {key: number, element: DomElement}|undefined {
+export function getElement(
+  id: number | undefined
+): { key: number; element: DomElement } | undefined {
 
+  let elementData = undefined;
   elementsStore.dom.children.forEach((element, key) => {
     if (element.id === id) {
-        return {
-          element,
-          key,
-        }
+      return elementData = {
+        element,
+        key
       }
-  });
+    }
+  })
 
-  return undefined;
+  return elementData;
 }

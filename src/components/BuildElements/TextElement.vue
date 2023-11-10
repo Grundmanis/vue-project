@@ -8,7 +8,7 @@ export default {
   props: {
     id: {
       type: Number,
-      required: true,
+      required: true
     }
   },
   data() {
@@ -17,7 +17,7 @@ export default {
         id: this.id,
         isNestable: false,
         tag: 'p',
-        className: "b-text",
+        className: 'b-text',
         elementConfig: {
           text: 'lorem ipsum valis margulis',
           tag: 'p'
@@ -27,7 +27,7 @@ export default {
           padding: '0',
           margin: '0',
           color: '#000'
-        },
+        }
       }
     }
   }

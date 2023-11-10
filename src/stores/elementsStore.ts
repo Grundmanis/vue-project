@@ -1,32 +1,6 @@
-import { reactive, shallowRef, type Component } from 'vue'
+import { reactive, shallowRef } from 'vue'
 import WrapperElement from '../components/BuildElements/WrapperElement.vue'
-
-export interface DomElementConfig {
-  text?: string,
-  tag?: string,
-}
-
-export interface DomElementStyles {
-  [k: string]: string,
-} 
-
-export interface DomElement {
-    id: number,
-    parentId: number,
-    type: Component,
-    config: DomElementConfig,
-    styles: DomElementStyles,
-}
-
-export interface ElementsStore {
-  showGrid: boolean,
-  incrementedId: number,
-  dom: {
-    id: number,
-    type: Component,
-    children: DomElement[],
-  }
-}
+import type { ElementsStore } from '@/interfaces/ElementStore'
 
 export const elementsStore: ElementsStore = reactive({
   dom: {
@@ -35,5 +9,5 @@ export const elementsStore: ElementsStore = reactive({
     children: []
   },
   showGrid: true,
-  incrementedId: 1,
+  incrementedId: 1
 })

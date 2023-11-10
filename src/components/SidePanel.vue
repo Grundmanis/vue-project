@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  import { elementsStore } from '../stores/elementsStore'
-  import { activeStore } from '../stores/activeStore'
-  import ElementStyles from './ElementStyles.vue'
-  import ElementConfig from './ElementConfig.vue'
-  import ElementsToInsert from './ElementsToInsert.vue'
+import { elementsStore } from '../stores/elementsStore'
+import { activeStore } from '../stores/activeStore'
+import ElementStyles from './ElementStyles.vue'
+import ElementConfig from './ElementConfig.vue'
+import ElementsToInsert from './ElementsToInsert.vue'
 </script>
 
 <template>
@@ -25,10 +25,10 @@
       <ElementStyles />
       <hr />
     </div>
-   <div>
+    <div>
       <h3>Config</h3>
       <ElementConfig />
-    <hr />
-   </div>
+      <hr />
+    </div>
   </div>
 </template>

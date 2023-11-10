@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { shallowRef, type PropType } from 'vue'
 import { activeStore } from '../../stores/activeStore'
-import { elementsStore, type DomElementStyles, type DomElementConfig } from '../../stores/elementsStore'
+import { elementsStore } from '../../stores/elementsStore'
 import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { getElement } from '@/composable/computed'
+import type { DomElementConfig } from '@/interfaces/DomElementConfig'
+import type { DomElementStyles } from '@/interfaces/DomElementStyles'
 </script>
 
 <script lang="ts">
@@ -11,16 +13,16 @@ export default {
   props: {
     id: {
       type: Number,
-      required: true,
+      required: true
     },
     tag: String,
     className: String,
     elementStyles: {
-        type: Object as PropType<DomElementStyles>,
-        required: true,
+      type: Object as PropType<DomElementStyles>,
+      required: true
     },
-    elementConfig:  Object as PropType<DomElementConfig>,
-    isNestable: Boolean,
+    elementConfig: Object as PropType<DomElementConfig>,
+    isNestable: Boolean
   },
   data() {
     return {
@@ -97,14 +99,14 @@ export default {
       elementsStore.dom.children.splice(elementData.key, 1)
     },
     filteredElements() {
-    const children = []
-    for (const element of elementsStore.dom.children) {
-      if (element.parentId == this.id) {
-        children.push(element)
+      const children = []
+      for (const element of elementsStore.dom.children) {
+        if (element.parentId == this.id) {
+          children.push(element)
+        }
       }
-    }
-    return children
-  },
+      return children
+    },
     duplicateElement() {
       const elementData = getElement(this.id)
       if (!elementData) {
@@ -132,7 +134,7 @@ export default {
 
 <template>
   <component
-    :is="updatedConfig?.tag || tag" 
+    :is="updatedConfig?.tag || tag"
     :style="updatedStyles"
     v-on:mouseover="() => hover(true)"
     v-on:mouseout="() => hover(false)"
@@ -144,7 +146,12 @@ export default {
       <button v-if="id !== 1" title="Remove" class="b-action-remove" v-on:click="removeElement">
         <TrashIcon />
       </button>
-      <button v-if="id !== 1" title="Duplicate" class="b-action-duplicate" v-on:click="duplicateElement">
+      <button
+        v-if="id !== 1"
+        title="Duplicate"
+        class="b-action-duplicate"
+        v-on:click="duplicateElement"
+      >
         <DocumentDuplicateIcon />
       </button>
       <!-- <button title="Drag" class="b-action-drag">
@@ -153,15 +160,15 @@ export default {
     </div>
 
     <slot name="nested" v-if="isNestable">
-        <component
-          v-for="element in filteredElements()"
-          :is="element.type"
-          v-bind:key="element.id"
-          :id="element.id"
-          :type="element.type"
-        />
+      <component
+        v-for="element in filteredElements()"
+        :is="element.type"
+        v-bind:key="element.id"
+        :id="element.id"
+        :type="element.type"
+      />
     </slot>
-    
+
     <slot></slot>
   </component>
 </template>

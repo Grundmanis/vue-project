@@ -1,10 +1,11 @@
+import type { DomElementConfig } from '@/interfaces/DomElementConfig'
+import type { DomElementStyles } from '@/interfaces/DomElementStyles'
 import { reactive } from 'vue'
-import type { DomElementConfig, DomElementStyles } from './elementsStore'
 
 export interface ActiveStore {
-  active: number,
-  updatedStyles: DomElementStyles,
-  config: DomElementConfig,
+  active: number
+  updatedStyles: DomElementStyles
+  config: DomElementConfig
 }
 
 export const activeStore: ActiveStore = reactive({
