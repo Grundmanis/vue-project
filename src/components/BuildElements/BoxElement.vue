@@ -9,18 +9,24 @@ export default {
   },
   data() {
     return {
-      defaultStyles: {
-        height: 'auto',
-        fontSize: '14px',
-        minHeight: '100px',
-        width: '100%',
-        display: 'block'
-      }
+      props: {
+        id: this.id,
+        isNestable: true,
+        tag: 'div',
+        className: "b-box",
+        elementStyles: {
+          height: 'auto',
+          fontSize: '14px',
+          minHeight: '100px',
+          width: '100%',
+          display: 'block'
+        },
+      },
     }
   }
 }
 </script>
 
 <template>
-  <ElementTemplate :isNestable="true" :id="id" tag="div" className="b-box" :elementStyles="defaultStyles" />
+  <ElementTemplate v-bind="props" />
 </template>

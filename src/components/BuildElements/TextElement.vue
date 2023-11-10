@@ -11,15 +11,21 @@ export default {
   },
   data() {
     return {
-      defaultStyles: {
-        width: 'auto',
-        padding: '0',
-        margin: '0',
-        color: '#000'
-      },
-      config: {
-        text: 'lorem ipsum valis margulis',
-        tag: 'p' // TODO: write tests for tag
+      props: {
+        id: this.id,
+        isNestable: false,
+        tag: 'p',
+        className: "b-text",
+        elementConfig: {
+          text: 'lorem ipsum valis margulis',
+          tag: 'p'
+        },
+        elementStyles: {
+          width: 'auto',
+          padding: '0',
+          margin: '0',
+          color: '#000'
+        },
       }
     }
   }
@@ -27,13 +33,7 @@ export default {
 </script>
 
 <template>
-  <ElementTemplate
-    :id="id"
-    className="b-text"
-    :elementStyles="defaultStyles"
-    :elementConfig="config"
-    :tag="config.tag"
-  >
-    {{ getConfig(id, 'text', config.text) }}
+  <ElementTemplate v-bind="props">
+    {{ getConfig(id, 'text', props.elementConfig.text) }}
   </ElementTemplate>
 </template>
