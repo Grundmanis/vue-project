@@ -4,6 +4,7 @@ import { elementsStore } from '../stores/elementsStore'
 import { activeStore } from '../stores/activeStore'
 import BoxElement from './BuildElements/BoxElement.vue'
 import TextElement from './BuildElements/TextElement.vue'
+import ImageElement from './BuildElements/ImageElement.vue'
 import type { DomElement } from '@/interfaces/DomElement'
 </script>
 
@@ -33,5 +34,8 @@ export default {
     <li>
       <button id="b-add-text" v-on:click="addElement(TextElement)">Text</button>
     </li>
+    <!-- <li>
+      <button id="b-add-image" v-on:click="addElement(ImageElement)">Image</button>
+    </li> -->
   </ul>
 </template>

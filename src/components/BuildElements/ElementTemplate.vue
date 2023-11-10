@@ -2,9 +2,9 @@
 import { shallowRef, type PropType } from 'vue'
 import { activeStore } from '../../stores/activeStore'
 import { elementsStore } from '../../stores/elementsStore'
-import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import type { DomElementConfig } from '@/interfaces/DomElementConfig'
 import type { DomElementStyles } from '@/interfaces/DomElementStyles'
+import ElementToolbar from '../ElementToolbar.vue'
 import * as Obj from '@/helpers/Obj'
 </script>
 
@@ -57,8 +57,9 @@ export default {
       return elementData.element.styles
     },
     updatedConfig() {
-      // TODO: not every element has config
-      // return empty object?
+      if (!this.elementConfig) {
+        return {};
+      }
       const elementData = elementsStore.getElementData(this.id)
       if (!elementData) {
         return this.elementConfig
@@ -77,9 +78,11 @@ export default {
   },
   methods: {
     activate() {
+      console.log("activate", this.id)
       // TODO: check the ref issue with config\
       const updatedConfig = this.updatedConfig
       const config = updatedConfig ? Obj.clone(updatedConfig) : {} // TODO: not every el has config
+      
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
       activeStore.config = config
@@ -113,6 +116,7 @@ export default {
       const newStyles = Obj.clone(this.updatedStyles)
       const updatedConfig = this.updatedConfig
       const newConfig = updatedConfig ? Obj.clone(updatedConfig) : {}
+
       const newElement = {
         id: elementsStore.incrementedId,
         parentId: elementData.element.parentId,
@@ -132,31 +136,10 @@ export default {
     :style="updatedStyles"
     v-on:mouseover="() => setMouseOver(true)"
     v-on:mouseout="() => setMouseOver(false)"
-    v-on:click.self="activate"
+    v-on:click.capture="activate"
     :class="[`b-element ${className}`, isActive, isMouseOver ? 'hovered' : '']"
   >
-    <div class="b-actions-toolbar">
-      <span>#{{ id }}</span>
-      <button
-        v-if="id !== elementsStore.dom.id"
-        title="Remove"
-        class="b-action-remove"
-        v-on:click="removeElement"
-      >
-        <TrashIcon />
-      </button>
-      <button
-        v-if="id !== elementsStore.dom.id"
-        title="Duplicate"
-        class="b-action-duplicate"
-        v-on:click="duplicateElement"
-      >
-        <DocumentDuplicateIcon />
-      </button>
-      <!-- <button title="Drag" class="b-action-drag">
-        <ArrowsPointingOutIcon />
-      </button> -->
-    </div>
+    <ElementToolbar :id="id" @onRemove="removeElement" @onDuplicate="duplicateElement"  />
 
     <slot name="nested" v-if="isNestable">
       <component
