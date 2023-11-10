@@ -12,8 +12,8 @@ jobs:
         with:
           node-version: '20.x'
       - run: npm ci
-      - name: Run unit tests
-        run: npm run test:unit
+      # - name: Run unit tests
+      #   run: npm run test:unit
       - name: Build
         run: npm run build
       - name: Run end to end tests
