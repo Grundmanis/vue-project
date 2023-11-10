@@ -6,7 +6,10 @@ import ElementTemplate from './ElementTemplate.vue'
 <script lang="ts">
 export default {
   props: {
-    id: Number
+    id: {
+      type: Number,
+      required: true,
+    }
   },
   data() {
     return {
