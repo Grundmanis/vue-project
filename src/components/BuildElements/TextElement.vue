@@ -16,7 +16,7 @@ export default {
       props: {
         id: this.id,
         isNestable: false,
-        tag: 'p',
+        tag: 'p', // TODO: remove
         className: 'b-text',
         elementConfig: {
           text: 'lorem ipsum valis margulis',
@@ -36,6 +36,6 @@ export default {
 
 <template>
   <ElementTemplate v-bind="props">
-    {{ elementsStore.getElement(id)?.element.config.text }}
+    {{ elementsStore.getElementData(id)?.element.config.text }}
   </ElementTemplate>
 </template>
