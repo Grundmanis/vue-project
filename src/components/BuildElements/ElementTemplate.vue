@@ -33,15 +33,15 @@ export default {
     if (!elementData) {
       return
     }
-    if (!Object.keys(elementsStore.dom.children[elementData.key].styles).length) {
-      elementsStore.dom.children[elementData.key].styles = this.elementStyles
+    if (!Object.keys(elementsStore.dom.elements[elementData.key].styles).length) {
+      elementsStore.dom.elements[elementData.key].styles = this.elementStyles
     }
 
     if (
       this.elementConfig &&
-      !Object.keys(elementsStore.dom.children[elementData.key].config).length
+      !Object.keys(elementsStore.dom.elements[elementData.key].config).length
     ) {
-      elementsStore.dom.children[elementData.key].config = this.elementConfig
+      elementsStore.dom.elements[elementData.key].config = this.elementConfig
     }
   },
   computed: {
@@ -52,11 +52,11 @@ export default {
       }
 
       if (activeStore.active === this.id && Object.keys(activeStore.updatedStyles).length > 0) {
-        elementsStore.dom.children[elementData.key].styles = activeStore.updatedStyles
+        elementsStore.dom.elements[elementData.key].styles = activeStore.updatedStyles
         return activeStore.updatedStyles
       }
 
-      return elementsStore.dom.children[elementData.key].styles
+      return elementsStore.dom.elements[elementData.key].styles
     },
     updatedConfig() {
       // TODO: not every element has config
@@ -68,11 +68,11 @@ export default {
       }
 
       if (activeStore.active === this.id && Object.keys(activeStore.config).length) {
-        elementsStore.dom.children[elementData.key].config = activeStore.config
+        elementsStore.dom.elements[elementData.key].config = activeStore.config
         return activeStore.config
       }
 
-      return elementsStore.dom.children[elementData.key].config
+      return elementsStore.dom.elements[elementData.key].config
     },
     isActive() {
       return activeStore.active === this.id ? 'active' : ''
@@ -93,11 +93,11 @@ export default {
       if (!elementData) {
         return
       }
-      elementsStore.dom.children.splice(elementData.key, 1)
+      elementsStore.dom.elements.splice(elementData.key, 1)
     },
     filteredElements() {
       const children = []
-      for (const element of elementsStore.dom.children) {
+      for (const element of elementsStore.dom.elements) {
         if (element.parentId == this.id) {
           children.push(element)
         }
@@ -123,7 +123,7 @@ export default {
         },
         type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
       }
-      elementsStore.dom.children.splice(elementData.key, 0, newElement)
+      elementsStore.dom.elements.splice(elementData.key, 0, newElement)
     }
   }
 }

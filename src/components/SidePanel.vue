@@ -14,7 +14,7 @@ import ElementsToInsert from './ElementsToInsert.vue'
     <hr />
     <h3><small>Selected element </small>#{{ activeStore.active }}</h3>
     <hr />
-    <!-- Do not allow to add elements inside of not nested elements like TextElement -->
+    <!-- TODO: Do not allow to add elements inside of not nested elements like TextElement -->
     <div>
       <h3>Insert element</h3>
       <ElementsToInsert />

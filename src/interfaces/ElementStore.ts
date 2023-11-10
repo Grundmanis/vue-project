@@ -8,7 +8,7 @@ export interface ElementsStore {
   dom: {
     id: number
     type: Component
-    children: DomElement[]
+    elements: DomElement[]
   },
   getElement(id: number) : ElementData | undefined
 }

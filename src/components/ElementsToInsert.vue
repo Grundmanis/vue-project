@@ -19,7 +19,7 @@ export default {
         styles: {},
         parentId: activeStore.active
       }
-      elementsStore.dom.children.push(element)
+      elementsStore.dom.elements.push(element)
     }
   }
 }
