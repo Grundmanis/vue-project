@@ -1,29 +1,11 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue'
-// @ts-ignore
-import { elementsStore } from '../stores/elementsStore.js'
-// @ts-ignore
-import { activeStore } from '../stores/activeStore.js'
-import StyleElement from './StyleElement.vue'
-import BoxElement from './BuildElements/BoxElement.vue'
-</script>
-
-<script lang="ts">
-export default {
-  methods: {
-    addElement(component: typeof BoxElement) {
-      
-      const newId = elementsStore.incrementedId + 1 // ++
-      elementsStore.incrementedId = newId
-      const element = {
-        type: shallowRef(component),
-        id: newId,
-        parentId: activeStore.active
-      }
-      elementsStore.dom.children.push(element)
-    }
-  }
-}
+  // @ts-ignore
+  import { elementsStore } from '../stores/elementsStore.js'
+  // @ts-ignore
+  import { activeStore } from '../stores/activeStore.js'
+  import ElementStyles from './ElementStyles.vue'
+  import ElementConfig from './ElementConfig.vue'
+  import ElementsToInsert from './ElementsToInsert.vue'
 </script>
 
 <template>
@@ -34,17 +16,21 @@ export default {
     <hr />
     <h3><small>Selected element </small>#{{ activeStore.active }}</h3>
     <hr />
-    <h4>Insert element</h4>
-    <ul>
-      <li>
-        <button v-on:click="addElement(BoxElement)">Box</button>
-      </li>
-    </ul>
-    <hr />
-    <h4>Update styles</h4>
-    <div v-for="(style, key, index) in activeStore.updatedStyles" v-bind:key="index">
-      <StyleElement :name="key.toString()" />
+    <!-- Do not allow to add elements inside of not nested elements like TextElement -->
+    <div>
+      <h3>Insert element</h3>
+      <ElementsToInsert />
     </div>
     <hr />
+    <div>
+      <h3>Styles</h3>
+      <ElementStyles />
+      <hr />
+    </div>
+   <div>
+      <h3>Config</h3>
+      <ElementConfig />
+    <hr />
+   </div>
   </div>
 </template>
