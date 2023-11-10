@@ -19,6 +19,7 @@ export default {
         className: 'b-list',
         elementConfig: {
           tag: 'ul', // TODO: add ul type
+          type: 'vertical',
           list: [
             {
               text: 'Home',
@@ -48,7 +49,7 @@ export default {
 </script>
 
 <template>
-  <ElementTemplate v-bind="props">
+  <ElementTemplate v-bind="props" :class="elementsStore.getElementData(id)?.element.config.type === 'vertical' ? 'vertical' : 'horizontal'">
     <li :key="index" v-for="(listElement, index) in elementsStore.getElementData(id)?.element.config.list">{{ listElement.text }}</li>
   </ElementTemplate>
 </template>
