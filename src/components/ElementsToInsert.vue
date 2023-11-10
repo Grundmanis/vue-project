@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { shallowRef } from 'vue'
-import { elementsStore, type DomElement } from '../stores/elementsStore'
+import { elementsStore } from '../stores/elementsStore'
 import { activeStore } from '../stores/activeStore'
 import BoxElement from './BuildElements/BoxElement.vue'
 import TextElement from './BuildElements/TextElement.vue'
+import type { DomElement } from '@/interfaces/DomElement'
 </script>
 
 <script lang="ts">

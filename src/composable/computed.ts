@@ -11,7 +11,6 @@ export function getConfig(
   defaultValue: unknown
 ) {
   return computed(() => {
-    console.log("get element config", id);
     const elementData = getElement(id)
     if (!elementData) {
       console.error('no element data on updatedStyles')
@@ -30,16 +29,16 @@ export function getConfig(
 export function getElement(
   id: number | undefined
 ): { key: number; element: DomElement } | undefined {
-
-  let elementData = undefined;
+  let elementData = undefined
   elementsStore.dom.children.forEach((element, key) => {
     if (element.id === id) {
-      return elementData = {
+      elementData = {
         element,
         key
       }
+      return
     }
   })
 
-  return elementData;
+  return elementData
 }
