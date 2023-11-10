@@ -41,6 +41,12 @@ describe('Text Element', () => {
       cy.get('#side-panel button').eq(1).click();
       cy.get('.b-wrapper > .b-text').should('have.length', 5)
     })
+    it('should update the tag', () => {
+      cy.get('.b-text').trigger('click');
+      cy.get('.b-tag-element').clear();
+      cy.get('.b-tag-element').type('h1');
+      cy.get('h1.b-text')
+    })
   });
 
   describe('Delete', () => {
@@ -80,6 +86,8 @@ describe('Text Element', () => {
 
       cy.get('.b-text-element').clear();
       cy.get('.b-text-element').type('Hello');
+      cy.get('.b-tag-element').clear();
+      cy.get('.b-tag-element').type('h1');
 
       cy.get('.b-text').trigger('mouseover');
       cy.get('.b-text .b-action-duplicate').click();
@@ -92,6 +100,8 @@ describe('Text Element', () => {
       
       cy.get('.b-text').eq(0).should('have.css', 'color', 'rgb(85, 85, 85)');
       cy.get('.b-text').eq(1).should('have.css', 'color', 'rgb(85, 85, 85)');
+
+      cy.get('h1.b-text');
 
     })
     it('should duplicate multiple element with updated styles', () => {
@@ -110,6 +120,11 @@ describe('Text Element', () => {
       cy.get('.b-text').eq(1).should('have.css', 'color', 'rgb(85, 85, 85)');
       cy.get('.b-text').eq(2).should('have.css', 'color', 'rgb(85, 85, 85)');
       cy.get('.b-text').eq(3).should('have.css', 'color', 'rgb(85, 85, 85)');
+
+      cy.get('h1.b-text').eq(0);
+      cy.get('h1.b-text').eq(1);
+      cy.get('h1.b-text').eq(2);
+      cy.get('h1.b-text').eq(3);
     })
     it('should change the style and config of duplicated element', () => {
 
@@ -120,17 +135,24 @@ describe('Text Element', () => {
       
       cy.get('.b-text-element').clear();
       cy.get('.b-text-element').type('Bye');
+      
+      cy.get('.b-tag-element').clear();
+      cy.get('.b-tag-element').type('h3');
 
       cy.get('.b-text').eq(1).trigger('mouseover');
       cy.get('.b-text .b-action-duplicate').eq(1).click();
 
       cy.get('.b-text').eq(0).contains('Hello');
       cy.get('.b-text').eq(0).should('have.css', 'color', 'rgb(85, 85, 85)');
+      cy.get('h1.b-text').eq(0);
       
       cy.get('.b-text').eq(1).contains('Bye');
       cy.get('.b-text').eq(1).should('have.css', 'color', 'rgb(85, 85, 85)');
+      cy.get('h1.b-text').eq(0);
+
       cy.get('.b-text').eq(2).contains('Bye');
       cy.get('.b-text').eq(2).should('have.css', 'color', 'rgb(85, 85, 85)');
+      cy.get('h3.b-text').eq(1)
     })
     it('should add element with default style and config after updating', () => {
       
@@ -145,6 +167,7 @@ describe('Text Element', () => {
 
       cy.get('.b-text').eq(2).contains('lorem ipsum');
       cy.get('.b-text').eq(2).should('have.css', 'color', 'rgb(0, 0, 0)');
+      cy.get('p.b-text');
     })
     it('should be able to delete the root element after duplication', () => {
 
@@ -153,6 +176,7 @@ describe('Text Element', () => {
 
       cy.get('.b-text').should('have.length', 1)
       cy.get('.b-text').should('have.css', 'color', 'rgb(85, 85, 85)');
+      cy.get('h1.b-text');
     })
     it('should correctly position the new duplicated element', () => {
 
@@ -167,6 +191,9 @@ describe('Text Element', () => {
       cy.get('.b-text-element').clear();
       cy.get('.b-text-element').type('Bye');
 
+      cy.get('.b-tag-element').clear();
+      cy.get('.b-tag-element').type('h4');
+
       cy.get('.b-text').eq(1).trigger('mouseover');
       cy.get('.b-text .b-action-duplicate').eq(1).click();
 
@@ -175,9 +202,11 @@ describe('Text Element', () => {
 
       cy.get('.b-text').eq(1).contains('Bye');
       cy.get('.b-text').eq(1).should('have.css', 'color', 'rgb(85, 85, 85)');
+      cy.get('h4.b-text').eq(0);
 
       cy.get('.b-text').eq(2).contains('Bye');
       cy.get('.b-text').eq(2).should('have.css', 'color', 'rgb(85, 85, 85)');
+      cy.get('h4.b-text').eq(1);
       
       cy.get('.b-text').eq(3).contains('Hello');
       cy.get('.b-text').eq(3).should('have.css', 'color', 'rgb(85, 85, 85)');
