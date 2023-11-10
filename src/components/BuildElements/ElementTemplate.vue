@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue'
+import { shallowRef, type PropType } from 'vue'
 import { activeStore } from '../../stores/activeStore'
-import { elementsStore } from '../../stores/elementsStore'
+import { elementsStore, type DomElementStyles, type DomElementConfig } from '../../stores/elementsStore'
 import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { getElement } from '@/composable/computed'
 </script>
@@ -9,11 +9,17 @@ import { getElement } from '@/composable/computed'
 <script lang="ts">
 export default {
   props: {
-    id: Number,
+    id: {
+      type: Number,
+      required: true,
+    },
     tag: String,
     className: String,
-    elementStyles: Object,
-    elementConfig: Object,
+    elementStyles: {
+        type: Object as PropType<DomElementStyles>,
+        required: true,
+    },
+    elementConfig:  Object as PropType<DomElementConfig>,
     isNestable: Boolean,
   },
   data() {
@@ -113,8 +119,8 @@ export default {
         parentId: elementData.element.parentId,
         styles: newStyles,
         config: {
-          text: newConfig.text,
-          tag: newConfig.tag
+          text: newConfig?.text,
+          tag: newConfig?.tag
         },
         type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
       }

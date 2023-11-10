@@ -1,6 +1,13 @@
 import { reactive } from 'vue'
+import type { DomElementConfig, DomElementStyles } from './elementsStore'
 
-export const activeStore = reactive({
+export interface ActiveStore {
+  active: number,
+  updatedStyles: DomElementStyles,
+  config: DomElementConfig,
+}
+
+export const activeStore: ActiveStore = reactive({
   active: 1,
   updatedStyles: {},
   config: {}

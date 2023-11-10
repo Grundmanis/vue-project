@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { shallowRef } from 'vue'
-  import { elementsStore } from '../stores/elementsStore'
+  import { elementsStore, type DomElement } from '../stores/elementsStore'
   import { activeStore } from '../stores/activeStore'
   import BoxElement from './BuildElements/BoxElement.vue'
   import TextElement from './BuildElements/TextElement.vue'
@@ -11,10 +11,11 @@ export default {
   methods: {
     addElement(component: unknown) {
       elementsStore.incrementedId++;
-      const element = {
+      const element: DomElement = {
         type: shallowRef(component),
         id: elementsStore.incrementedId,
         config: {},
+        styles: {},
         parentId: activeStore.active
       }
       elementsStore.dom.children.push(element)

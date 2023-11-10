@@ -1,36 +1,39 @@
-import { reactive, shallowRef } from 'vue'
+import { reactive, shallowRef, type Component } from 'vue'
 import WrapperElement from '../components/BuildElements/WrapperElement.vue'
 
-export const elementsStore = reactive({
+export interface DomElementConfig {
+  text?: string,
+  tag?: string,
+}
+
+export interface DomElementStyles {
+  [k: string]: string,
+} 
+
+export interface DomElement {
+    id: number,
+    parentId: number,
+    type: Component,
+    config: DomElementConfig,
+    styles: DomElementStyles,
+}
+
+export interface ElementsStore {
+  showGrid: boolean,
+  incrementedId: number,
+  dom: {
+    id: number,
+    type: Component,
+    children: DomElement[],
+  }
+}
+
+export const elementsStore: ElementsStore = reactive({
   dom: {
     id: 1,
     type: shallowRef(WrapperElement),
-    children: [
-      //   {
-      //   id: 2,
-      //   parentId: 1,
-      //   type: Box,
-      // },
-      // {
-      //   id: 3,
-      //   parentId: 1,
-      //   type: Box,
-      // },
-      // {
-      //   id: 4,
-      //   parentId: 1,
-      //   type: Box,
-      // },
-      // {
-      //   id: 5,
-      //   parentId: 4,
-      //   type: Box,
-      // }
-    ]
+    children: []
   },
   showGrid: true,
   incrementedId: 1,
-  getConfig: () => {
-    
-  }
 })

@@ -1,9 +1,9 @@
 import { computed } from 'vue'
 import { activeStore } from '../stores/activeStore'
-import { elementsStore } from '../stores/elementsStore.js'
+import { elementsStore, type DomElement, type DomElementConfig } from '../stores/elementsStore.js'
 
 // TODO: refactor and then delete 
-export function getConfig(id: number | undefined, key: string, defaultValue: unknown) {
+export function getConfig(id: number | undefined, key: keyof DomElementConfig, defaultValue: unknown) {
   return computed(() => {
     const elementData = getElement(id)
     if (!elementData) {
@@ -20,14 +20,16 @@ export function getConfig(id: number | undefined, key: string, defaultValue: unk
   })
 }
 
-export function getElement(id: number | undefined) {
-  for (const key in elementsStore.dom.children) {
-    const element = elementsStore.dom.children[key]
+export function getElement(id: number | undefined): {key: number, element: DomElement}|undefined {
+
+  elementsStore.dom.children.forEach((element, key) => {
     if (element.id === id) {
-      return {
-        element,
-        key
+        return {
+          element,
+          key,
+        }
       }
-    }
-  }
+  });
+
+  return undefined;
 }
