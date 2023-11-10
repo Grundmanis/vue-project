@@ -1,6 +1,8 @@
 # vue-project
 
-The front-end builder
+The front-end builder using the vue.js framework.
+Added e2e tests.
+Added the github actions to run tests on "deploy", check "Actions tab".
 
 # TODO list
 
