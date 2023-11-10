@@ -3,7 +3,6 @@ import { shallowRef, type PropType } from 'vue'
 import { activeStore } from '../../stores/activeStore'
 import { elementsStore } from '../../stores/elementsStore'
 import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/vue/24/outline'
-import { getElement } from '@/composable/computed'
 import type { DomElementConfig } from '@/interfaces/DomElementConfig'
 import type { DomElementStyles } from '@/interfaces/DomElementStyles'
 </script>
@@ -30,7 +29,7 @@ export default {
     }
   },
   created() {
-    const elementData = getElement(this.id)
+    const elementData = elementsStore.getElement(this.id)
     if (!elementData) {
       return
     }
@@ -47,7 +46,7 @@ export default {
   },
   computed: {
     updatedStyles() {
-      const elementData = getElement(this.id)
+      const elementData = elementsStore.getElement(this.id)
       if (!elementData) {
         return this.elementStyles
       }
@@ -62,7 +61,7 @@ export default {
     updatedConfig() {
       // TODO: not every element has config
       // return empty object?
-      const elementData = getElement(this.id)
+      const elementData = elementsStore.getElement(this.id)
       if (!elementData) {
         // console.error('no element data on updatedStyles')
         return this.elementConfig
@@ -90,7 +89,7 @@ export default {
       this.isHover = isHover
     },
     removeElement() {
-      const elementData = getElement(this.id)
+      const elementData = elementsStore.getElement(this.id)
       if (!elementData) {
         return
       }
@@ -106,7 +105,7 @@ export default {
       return children
     },
     duplicateElement() {
-      const elementData = getElement(this.id)
+      const elementData = elementsStore.getElement(this.id)
       if (!elementData) {
         return
       }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { getConfig } from '@/composable/computed'
 import ElementTemplate from './ElementTemplate.vue'
+import { elementsStore } from '../../stores/elementsStore'
 </script>
 
 <script lang="ts">
@@ -36,6 +36,6 @@ export default {
 
 <template>
   <ElementTemplate v-bind="props">
-    {{ getConfig(id, 'text', props.elementConfig.text) }}
+    {{ elementsStore.getElement(id)?.element.config.text }}
   </ElementTemplate>
 </template>
