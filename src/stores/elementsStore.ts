@@ -7,17 +7,17 @@ export const elementsStore: ElementsStore = reactive({
   dom: {
     id: 1,
     type: shallowRef(WrapperElement),
-    elements: []
   },
+  elements: [],
   showGrid: true,
   incrementedId: 1,
-  getElement: (id: number): ElementData | undefined => {
+  getElementData: (id: number): ElementData | undefined => {
     let elementData = undefined
-    elementsStore.dom.elements.forEach((element, key) => {
+    elementsStore.elements.forEach((element, index) => {
       if (element.id === id) {
         elementData = {
           element,
-          key
+          index
         }
         return
       }

@@ -5,6 +5,7 @@ import { elementsStore } from '../../stores/elementsStore'
 import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import type { DomElementConfig } from '@/interfaces/DomElementConfig'
 import type { DomElementStyles } from '@/interfaces/DomElementStyles'
+import { isEmpty } from '@/helpers/Obj'
 </script>
 
 <script lang="ts">
@@ -29,49 +30,46 @@ export default {
     }
   },
   created() {
-    const elementData = elementsStore.getElement(this.id)
+    const elementData = elementsStore.getElementData(this.id)
     if (!elementData) {
       return
     }
-    if (!Object.keys(elementsStore.dom.elements[elementData.key].styles).length) {
-      elementsStore.dom.elements[elementData.key].styles = this.elementStyles
-    }
 
-    if (
-      this.elementConfig &&
-      !Object.keys(elementsStore.dom.elements[elementData.key].config).length
-    ) {
-      elementsStore.dom.elements[elementData.key].config = this.elementConfig
+    if (isEmpty(elementData.element.styles)) {
+      elementsStore.elements[elementData.index].styles = this.elementStyles
+    }
+    if (this.elementConfig && isEmpty(elementData.element.config)) {
+      elementsStore.elements[elementData.index].config = this.elementConfig
     }
   },
   computed: {
     updatedStyles() {
-      const elementData = elementsStore.getElement(this.id)
+      const elementData = elementsStore.getElementData(this.id)
       if (!elementData) {
         return this.elementStyles
       }
 
-      if (activeStore.active === this.id && Object.keys(activeStore.updatedStyles).length > 0) {
-        elementsStore.dom.elements[elementData.key].styles = activeStore.updatedStyles
+      if (activeStore.active === this.id && !isEmpty(activeStore.updatedStyles)) {
+        elementsStore.elements[elementData.index].styles = activeStore.updatedStyles
         return activeStore.updatedStyles
       }
 
-      return elementsStore.dom.elements[elementData.key].styles
+      return elementData.element.styles
     },
     updatedConfig() {
       // TODO: not every element has config
       // return empty object?
-      const elementData = elementsStore.getElement(this.id)
+      const elementData = elementsStore.getElementData(this.id)
       if (!elementData) {
         return this.elementConfig
       }
 
-      if (activeStore.active === this.id && Object.keys(activeStore.config).length) {
-        elementsStore.dom.elements[elementData.key].config = activeStore.config
+      if (activeStore.active === this.id && !isEmpty(activeStore.config)) {
+        elementsStore.elements[elementData.index].config = activeStore.config
         return activeStore.config
       }
 
-      return elementsStore.dom.elements[elementData.key].config
+      return elementData.element.config
     },
     isActive() {
       return activeStore.active === this.id ? 'active' : ''
@@ -89,15 +87,15 @@ export default {
       this.isMouseOver = isMouseOver
     },
     removeElement() {
-      const elementData = elementsStore.getElement(this.id)
+      const elementData = elementsStore.getElementData(this.id)
       if (!elementData) {
         return
       }
-      elementsStore.dom.elements.splice(elementData.key, 1)
+      elementsStore.elements.splice(elementData.index, 1)
     },
     childElements() {
       const children = []
-      for (const element of elementsStore.dom.elements) {
+      for (const element of elementsStore.elements) {
         if (element.parentId == this.id) {
           children.push(element)
         }
@@ -105,7 +103,7 @@ export default {
       return children
     },
     duplicateElement() {
-      const elementData = elementsStore.getElement(this.id)
+      const elementData = elementsStore.getElementData(this.id)
       if (!elementData) {
         return
       }
@@ -122,7 +120,7 @@ export default {
         },
         type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy the whole object
       }
-      elementsStore.dom.elements.splice(elementData.key, 0, newElement)
+      elementsStore.elements.splice(elementData.index, 0, newElement)
     }
   }
 }
