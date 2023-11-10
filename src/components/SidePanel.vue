@@ -10,7 +10,7 @@
 
 <template>
   <div id="side-panel">
-    <h4>Global options</h4>
+    <h3>Global options</h3>
     <input id="showGrid" type="checkbox" v-model="elementsStore.showGrid" />
     <label for="showGrid">Show grid</label>
     <hr />

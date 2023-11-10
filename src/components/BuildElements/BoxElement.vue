@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ElementTemplate from './ElementTemplate.vue'
-import { filteredElements } from '@/composable/computed'
 </script>
 
 <script lang="ts">
@@ -23,12 +22,5 @@ export default {
 </script>
 
 <template>
-  <ElementTemplate :id="id" tag="div" className="b-box" :elementStyles="defaultStyles">
-    <component
-      v-for="element in filteredElements(id)"
-      :is="element.type"
-      v-bind:key="element.id"
-      :id="element.id"
-    />
-  </ElementTemplate>
+  <ElementTemplate :isNestable="true" :id="id" tag="div" className="b-box" :elementStyles="defaultStyles" />
 </template>

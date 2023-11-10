@@ -33,13 +33,3 @@ export function getElement(id: number | undefined) {
     }
   }
 }
-
-export function filteredElements(id: number | undefined) {
-    const children = []
-    for (const element of elementsStore.dom.children) {
-      if (element.parentId == id) {
-        children.push(element)
-      }
-    }
-    return children
-  }

@@ -15,7 +15,8 @@ export default {
     tag: String,
     className: String,
     elementStyles: Object,
-    elementConfig: Object
+    elementConfig: Object,
+    isNestable: Boolean,
   },
   data() {
     return {
@@ -91,6 +92,15 @@ export default {
       }
       elementsStore.dom.children.splice(elementData.key, 1)
     },
+    filteredElements() {
+    const children = []
+    for (const element of elementsStore.dom.children) {
+      if (element.parentId == this.id) {
+        children.push(element)
+      }
+    }
+    return children
+  },
     duplicateElement() {
       const elementData = getElement(this.id)
       if (!elementData) {
@@ -137,6 +147,17 @@ export default {
         <ArrowsPointingOutIcon />
       </button> -->
     </div>
+
+    <slot name="nested" v-if="isNestable">
+        <component
+          v-for="element in filteredElements()"
+          :is="element.type"
+          v-bind:key="element.id"
+          :id="element.id"
+          :type="element.type"
+        />
+    </slot>
+    
     <slot></slot>
   </component>
 </template>
