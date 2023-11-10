@@ -32,7 +32,6 @@ export default {
   created() {
     const elementData = getElement(this.id)
     if (!elementData) {
-      console.error('no element data on created')
       return
     }
     if (!Object.keys(elementsStore.dom.children[elementData.key].styles).length) {
@@ -48,20 +47,16 @@ export default {
   },
   computed: {
     updatedStyles() {
-      console.log('get styles', this.id)
       const elementData = getElement(this.id)
       if (!elementData) {
-        console.error('returning elementStyles', JSON.stringify(this.elementStyles))
         return this.elementStyles
       }
 
       if (activeStore.active === this.id && Object.keys(activeStore.updatedStyles).length > 0) {
-        console.log('found active styles', activeStore.updatedStyles)
         elementsStore.dom.children[elementData.key].styles = activeStore.updatedStyles
         return activeStore.updatedStyles
       }
 
-      console.log('returning element styles', elementsStore.dom.children[elementData.key].styles)
       return elementsStore.dom.children[elementData.key].styles
     },
     updatedConfig() {
@@ -87,8 +82,6 @@ export default {
   methods: {
     activate() {
       const config = this.updatedConfig ? JSON.parse(JSON.stringify(this.updatedConfig)) : {} // TODO: not every el has config
-
-      console.log('upd styles', this.updatedStyles)
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
       activeStore.config = config
