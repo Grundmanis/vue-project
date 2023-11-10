@@ -78,7 +78,6 @@ export default {
   },
   methods: {
     activate() {
-      console.log("activate", this.id)
       // TODO: check the ref issue with config\
       const updatedConfig = this.updatedConfig
       const config = updatedConfig ? Obj.clone(updatedConfig) : {} // TODO: not every el has config
