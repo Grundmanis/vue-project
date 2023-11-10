@@ -34,8 +34,8 @@ export default {
     <li>
       <button id="b-add-text" v-on:click="addElement(TextElement)">Text</button>
     </li>
-    <!-- <li>
+    <li>
       <button id="b-add-image" v-on:click="addElement(ImageElement)">Image</button>
-    </li> -->
+    </li>
   </ul>
 </template>
