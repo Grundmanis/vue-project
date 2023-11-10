@@ -13,4 +13,9 @@ import { activeStore } from '../stores/activeStore'
     <input type="text" class="b-tag-element" v-model="activeStore.config.tag" />
     <hr />
   </div>
+  <div v-if="activeStore.config?.src !== undefined">
+    <h4>Change the src</h4>
+    <input type="text" class="b-src-element" v-model="activeStore.config.src" />
+    <hr />
+  </div>
 </template>

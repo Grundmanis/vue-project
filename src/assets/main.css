@@ -32,7 +32,13 @@
 .b-element .b-actions-toolbar svg {
   width: 14px;
 }
-
 .b-element.hovered > .b-actions-toolbar {
+  display: block;
+}
+.b-img {
+  display: inline-block;
+}
+.b-img img {
+  width: 100%;
   display: block;
 }
