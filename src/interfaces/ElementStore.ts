@@ -8,7 +8,7 @@ export interface ElementsStore {
   dom: {
     id: number
     type: Component
-  },
+  }
   elements: DomElement[]
-  getElementData(id: number) : ElementData | undefined
+  getElementData(id: number): ElementData | undefined
 }

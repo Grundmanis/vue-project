@@ -5,7 +5,7 @@ import { elementsStore } from '../../stores/elementsStore'
 import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import type { DomElementConfig } from '@/interfaces/DomElementConfig'
 import type { DomElementStyles } from '@/interfaces/DomElementStyles'
-import { isEmpty } from '@/helpers/Obj'
+import * as Obj from '@/helpers/Obj'
 </script>
 
 <script lang="ts">
@@ -35,11 +35,11 @@ export default {
       return
     }
 
-    if (isEmpty(elementData.element.styles)) {
-      elementsStore.elements[elementData.index].styles = this.elementStyles
+    if (Obj.isEmpty(elementData.element.styles)) {
+      elementData.element.styles = this.elementStyles
     }
-    if (this.elementConfig && isEmpty(elementData.element.config)) {
-      elementsStore.elements[elementData.index].config = this.elementConfig
+    if (this.elementConfig && Obj.isEmpty(elementData.element.config)) {
+      elementData.element.config = this.elementConfig
     }
   },
   computed: {
@@ -49,8 +49,8 @@ export default {
         return this.elementStyles
       }
 
-      if (activeStore.active === this.id && !isEmpty(activeStore.updatedStyles)) {
-        elementsStore.elements[elementData.index].styles = activeStore.updatedStyles
+      if (activeStore.active === this.id && !Obj.isEmpty(activeStore.updatedStyles)) {
+        elementData.element.styles = activeStore.updatedStyles
         return activeStore.updatedStyles
       }
 
@@ -64,8 +64,8 @@ export default {
         return this.elementConfig
       }
 
-      if (activeStore.active === this.id && !isEmpty(activeStore.config)) {
-        elementsStore.elements[elementData.index].config = activeStore.config
+      if (activeStore.active === this.id && !Obj.isEmpty(activeStore.config)) {
+        elementData.element.config = activeStore.config
         return activeStore.config
       }
 
@@ -73,17 +73,19 @@ export default {
     },
     isActive() {
       return activeStore.active === this.id ? 'active' : ''
-    }
+    },
   },
   methods: {
     activate() {
-      // TODO: check the ref issue with config
-      const config = this.updatedConfig ? JSON.parse(JSON.stringify(this.updatedConfig)) : {} // TODO: not every el has config
+      // TODO: check the ref issue with config\
+      const updatedConfig = this.updatedConfig
+      const config = updatedConfig ? Obj.clone(updatedConfig) : {} // TODO: not every el has config
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
       activeStore.config = config
     },
-    hover(isMouseOver: boolean) { // TOOD: move to computed?
+    setMouseOver(isMouseOver: boolean) {
+      // TOOD: move to computed?
       this.isMouseOver = isMouseOver
     },
     removeElement() {
@@ -108,16 +110,14 @@ export default {
         return
       }
       elementsStore.incrementedId++
-      const newStyles = JSON.parse(JSON.stringify(this.updatedStyles))
-      const newConfig = this.updatedConfig // TODO: check the issue with ref
+      const newStyles = Obj.clone(this.updatedStyles)
+      const updatedConfig = this.updatedConfig
+      const newConfig = updatedConfig ? Obj.clone(updatedConfig) : {}
       const newElement = {
         id: elementsStore.incrementedId,
         parentId: elementData.element.parentId,
         styles: newStyles,
-        config: {
-          text: newConfig?.text,
-          tag: newConfig?.tag
-        },
+        config: newConfig,
         type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy the whole object
       }
       elementsStore.elements.splice(elementData.index, 0, newElement)
@@ -130,18 +130,23 @@ export default {
   <component
     :is="updatedConfig?.tag || tag"
     :style="updatedStyles"
-    v-on:mouseover="() => hover(true)"
-    v-on:mouseout="() => hover(false)"
+    v-on:mouseover="() => setMouseOver(true)"
+    v-on:mouseout="() => setMouseOver(false)"
     v-on:click.self="activate"
     :class="[`b-element ${className}`, isActive, isMouseOver ? 'hovered' : '']"
   >
     <div class="b-actions-toolbar">
       <span>#{{ id }}</span>
-      <button v-if="id !== elementsStore.dom.id" title="Remove" class="b-action-remove" v-on:click="removeElement">
+      <button
+        v-if="id !== elementsStore.dom.id"
+        title="Remove"
+        class="b-action-remove"
+        v-on:click="removeElement"
+      >
         <TrashIcon />
       </button>
       <button
-        v-if="id !== 1"
+        v-if="id !== elementsStore.dom.id"
         title="Duplicate"
         class="b-action-duplicate"
         v-on:click="duplicateElement"

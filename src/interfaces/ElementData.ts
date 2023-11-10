@@ -1,6 +1,6 @@
 import type { DomElement } from './DomElement'
 
 export interface ElementData {
-  index: number,
-  element: DomElement,
+  index: number
+  element: DomElement
 }
