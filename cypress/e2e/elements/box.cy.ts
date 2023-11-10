@@ -1,3 +1,4 @@
+// TODO: combine with Text Element in Sidebar test
 describe('Box Element', () => {
 
   beforeEach(() => {
