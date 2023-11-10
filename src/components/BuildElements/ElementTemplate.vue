@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      isHover: false
+      isMouseOver: false
     }
   },
   created() {
@@ -63,7 +63,6 @@ export default {
       // return empty object?
       const elementData = elementsStore.getElement(this.id)
       if (!elementData) {
-        // console.error('no element data on updatedStyles')
         return this.elementConfig
       }
 
@@ -80,13 +79,14 @@ export default {
   },
   methods: {
     activate() {
+      // TODO: check the ref issue with config
       const config = this.updatedConfig ? JSON.parse(JSON.stringify(this.updatedConfig)) : {} // TODO: not every el has config
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
       activeStore.config = config
     },
-    hover(isHover: boolean) {
-      this.isHover = isHover
+    hover(isMouseOver: boolean) { // TOOD: move to computed?
+      this.isMouseOver = isMouseOver
     },
     removeElement() {
       const elementData = elementsStore.getElement(this.id)
@@ -95,7 +95,7 @@ export default {
       }
       elementsStore.dom.elements.splice(elementData.key, 1)
     },
-    filteredElements() {
+    childElements() {
       const children = []
       for (const element of elementsStore.dom.elements) {
         if (element.parentId == this.id) {
@@ -109,19 +109,18 @@ export default {
       if (!elementData) {
         return
       }
-      const newId = elementsStore.incrementedId + 1
-      elementsStore.incrementedId = newId
+      elementsStore.incrementedId++
       const newStyles = JSON.parse(JSON.stringify(this.updatedStyles))
-      const newConfig = this.updatedConfig // issue with ref
+      const newConfig = this.updatedConfig // TODO: check the issue with ref
       const newElement = {
-        id: newId,
+        id: elementsStore.incrementedId,
         parentId: elementData.element.parentId,
         styles: newStyles,
         config: {
           text: newConfig?.text,
           tag: newConfig?.tag
         },
-        type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy
+        type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy the whole object
       }
       elementsStore.dom.elements.splice(elementData.key, 0, newElement)
     }
@@ -136,11 +135,11 @@ export default {
     v-on:mouseover="() => hover(true)"
     v-on:mouseout="() => hover(false)"
     v-on:click.self="activate"
-    :class="[`b-element ${className}`, isActive, isHover ? 'hovered' : '']"
+    :class="[`b-element ${className}`, isActive, isMouseOver ? 'hovered' : '']"
   >
     <div class="b-actions-toolbar">
       <span>#{{ id }}</span>
-      <button v-if="id !== 1" title="Remove" class="b-action-remove" v-on:click="removeElement">
+      <button v-if="id !== elementsStore.dom.id" title="Remove" class="b-action-remove" v-on:click="removeElement">
         <TrashIcon />
       </button>
       <button
@@ -158,7 +157,7 @@ export default {
 
     <slot name="nested" v-if="isNestable">
       <component
-        v-for="element in filteredElements()"
+        v-for="element in childElements()"
         :is="element.type"
         v-bind:key="element.id"
         :id="element.id"
