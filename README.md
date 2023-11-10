@@ -6,9 +6,11 @@ Added the github actions to run tests on "deploy", check "Actions tab".
 
 # TODO list
 
+- Check performance
 - Disable the "add element" feature, when not-nested element is selected (e.g. TextElement)
 - Add the history of actions and undo/redo buttons
 - Add the auto-save in localStorage/indexDb/back-end? 
+- Refactor BoxElement and TextElement tests, combine and move them to SidePanel test
 
 ## Project Setup
 

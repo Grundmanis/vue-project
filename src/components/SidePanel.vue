@@ -1,22 +1,20 @@
 <script setup lang="ts">
-  // @ts-ignore
-  import { elementsStore } from '../stores/elementsStore.js'
-  // @ts-ignore
-  import { activeStore } from '../stores/activeStore.js'
-  import ElementStyles from './ElementStyles.vue'
-  import ElementConfig from './ElementConfig.vue'
-  import ElementsToInsert from './ElementsToInsert.vue'
+import { elementsStore } from '../stores/elementsStore'
+import { activeStore } from '../stores/activeStore'
+import ElementStyles from './ElementStyles.vue'
+import ElementConfig from './ElementConfig.vue'
+import ElementsToInsert from './ElementsToInsert.vue'
 </script>
 
 <template>
   <div id="side-panel">
-    <h4>Global options</h4>
+    <h3>Global options</h3>
     <input id="showGrid" type="checkbox" v-model="elementsStore.showGrid" />
     <label for="showGrid">Show grid</label>
     <hr />
     <h3><small>Selected element </small>#{{ activeStore.active }}</h3>
     <hr />
-    <!-- Do not allow to add elements inside of not nested elements like TextElement -->
+    <!-- TODO: Do not allow to add elements inside of not nested elements like TextElement -->
     <div>
       <h3>Insert element</h3>
       <ElementsToInsert />
@@ -27,10 +25,10 @@
       <ElementStyles />
       <hr />
     </div>
-   <div>
+    <div>
       <h3>Config</h3>
       <ElementConfig />
-    <hr />
-   </div>
+      <hr />
+    </div>
   </div>
 </template>

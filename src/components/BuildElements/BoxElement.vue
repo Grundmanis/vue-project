@@ -1,21 +1,29 @@
 <script setup lang="ts">
 import ElementTemplate from './ElementTemplate.vue'
-import { filteredElements } from '@/composable/computed'
 </script>
 
 <script lang="ts">
 export default {
   props: {
-    id: Number
+    id: {
+      type: Number,
+      required: true
+    }
   },
   data() {
     return {
-      defaultStyles: {
-        height: 'auto',
-        fontSize: '14px',
-        minHeight: '100px',
-        width: '100%',
-        display: 'block'
+      props: {
+        id: this.id,
+        isNestable: true,
+        tag: 'div',
+        className: 'b-box',
+        elementStyles: {
+          height: 'auto',
+          fontSize: '14px',
+          minHeight: '100px',
+          width: '100%',
+          display: 'block'
+        }
       }
     }
   }
@@ -23,12 +31,5 @@ export default {
 </script>
 
 <template>
-  <ElementTemplate :id="id" tag="div" className="b-box" :elementStyles="defaultStyles">
-    <component
-      v-for="element in filteredElements(id)"
-      :is="element.type"
-      v-bind:key="element.id"
-      :id="element.id"
-    />
-  </ElementTemplate>
+  <ElementTemplate v-bind="props" />
 </template>

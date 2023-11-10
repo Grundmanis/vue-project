@@ -1,25 +1,33 @@
 <script setup lang="ts">
-// @ts-ignore
-import { getConfig } from '@/composable/computed'
 import ElementTemplate from './ElementTemplate.vue'
+import { elementsStore } from '../../stores/elementsStore'
 </script>
 
 <script lang="ts">
 export default {
   props: {
-    id: Number
+    id: {
+      type: Number,
+      required: true
+    }
   },
   data() {
     return {
-      defaultStyles: {
-        width: 'auto',
-        padding: '0',
-        margin: '0',
-        color: '#000'
-      },
-      config: {
-        text: 'lorem ipsum valis margulis',
-        tag: 'p' // TODO: write tests for tag
+      props: {
+        id: this.id,
+        isNestable: false,
+        tag: 'p',
+        className: 'b-text',
+        elementConfig: {
+          text: 'lorem ipsum valis margulis',
+          tag: 'p'
+        },
+        elementStyles: {
+          width: 'auto',
+          padding: '0',
+          margin: '0',
+          color: '#000'
+        }
       }
     }
   }
@@ -27,13 +35,7 @@ export default {
 </script>
 
 <template>
-  <ElementTemplate
-    :id="id"
-    className="b-text"
-    :elementStyles="defaultStyles"
-    :elementConfig="config"
-    :tag="config.tag"
-  >
-    {{ getConfig(id, 'text', config.text) }}
+  <ElementTemplate v-bind="props">
+    {{ elementsStore.getElement(id)?.element.config.text }}
   </ElementTemplate>
 </template>

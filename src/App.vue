@@ -5,7 +5,7 @@ import WorkArea from './components/WorkArea.vue'
 </script>
 
 <template>
-  <div class="container-fluid">
+  <div>
     <SidePanel />
     <WorkArea />
   </div>
