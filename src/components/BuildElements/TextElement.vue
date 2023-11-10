@@ -16,7 +16,6 @@ export default {
       props: {
         id: this.id,
         isNestable: false,
-        tag: 'p', // TODO: remove
         className: 'b-text',
         elementConfig: {
           text: 'lorem ipsum valis margulis',
