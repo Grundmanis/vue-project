@@ -1,19 +1,15 @@
 import type { DomElementStyles } from "./DomElementStyles"
 
-export interface ListElement {
-  text: string
-}
-
 export interface DomElementConfig {
   text?: string
   tag?: string
   src?: string,
   type?: string,
-  list?: ListElement[]
-  children: {
+  list?: { text: string }[]
+  children?: {
     [s: string]: {
       styles: DomElementStyles,
     }
   }
-  styles?: DomElementStyles
+  // styles?: DomElementStyles
 }

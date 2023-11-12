@@ -38,7 +38,7 @@ export default {
 
 <template>
   <div v-for="(style, key, index) in updatedStyles" v-bind:key="index">
-    <select v-on:change="$emit('changeKey', key, $event, index)">
+    <select v-on:change="$emit('changeKey', key, ($event.currentTarget as HTMLInputElement)?.value, index)">
       <option v-for="(styleKey, index) in styleKeys" :selected="key === styleKey" :key="index" :value="styleKey">
         {{ styleKey }}
       </option>
@@ -47,8 +47,9 @@ export default {
       :class="`b-styled-element b-style-${key}`"
       type="text"
       :value="updatedStyles[key]"
-      v-on:input="$emit('changeValue', key, $event)"
+      v-on:input="$emit('changeValue', key, ($event.currentTarget as HTMLInputElement)?.value)"
     />
+    <!-- v-model="activeStore.updatedStyles[key]" -->
     <button v-on:click="$emit('deleteStyle', key)"><small>remove</small></button>
   </div>
   <button v-on:click="$emit('addNewStyle')">Add new style</button>

@@ -9,21 +9,33 @@
 <script lang="ts">
 export default {
     methods: {
-      changeKey(key: string|number, passedKey: string|number, newKey: string, passedIndex: number) {
-        let keyValues = Object.entries(activeStore.config.children[key].styles);
+      changeKey(key: string, passedKey: string, newKey: string, passedIndex: number) {
+        if (!activeStore.config.children) {
+          return;
+        }
+        let keyValues = Object.entries(activeStore.config.children[key].styles as Object);
         keyValues.splice(passedIndex, 0, [newKey, activeStore.config.children[key].styles[passedKey]]);
         let newObj = Object.fromEntries(keyValues) 
 
         activeStore.config.children[key].styles = newObj;
         delete activeStore.config.children[key].styles[passedKey];
       },
-      changeStyle(key: string|number, passedKey: string|number, newValue: string) {
+      changeStyle(key: string, passedKey: string, newValue: string) {
+        if (!activeStore.config.children) {
+          return;
+        }
         activeStore.config.children[key].styles[passedKey] = newValue;
       },
-      addNewStyle(key: string|number) {
+      addNewStyle(key: string) {
+        if (!activeStore.config.children) {
+          return;
+        }
         activeStore.config.children[key].styles['-'] = '';
       },
-      deleteStyle(key: string|number, passedKey: string|number) {
+      deleteStyle(key: string, passedKey: string) {
+        if (!activeStore.config.children) {
+          return;
+        }
 
         // TODO: refactor this lifehack
         let keyValues = Object.entries(activeStore.config.children[key].styles);
@@ -73,11 +85,11 @@ export default {
         <div v-if="!Obj.isEmpty(element.styles)">
 
           <ElementStyles 
-            @changeValue="(passedKey: string, event) => changeStyle(key, passedKey, event.target.value)" 
+            @changeValue="(passedKey: string, newValue: string) => changeStyle(key.toString(), passedKey, newValue)" 
             :updatedStyles="element.styles" 
-            @addNewStyle="() => addNewStyle(key)" 
-            @changeKey="(passedKey: string, event, passedIndex) => changeKey(key, passedKey, event.target.value, passedIndex)"
-            @deleteStyle="(passedKey: string) => deleteStyle(key, passedKey)"
+            @addNewStyle="() => addNewStyle(key.toString())" 
+            @changeKey="(passedKey: string, newValue: string, passedIndex: number) => changeKey(key.toString(), passedKey, newValue, passedIndex)"
+            @deleteStyle="(passedKey: string) => deleteStyle(key.toString(), passedKey)"
           />
           <!-- <div v-for="(style, styleKey, styleIndex) in element.styles" v-bind:key="styleIndex">
             <label>{{ styleKey }}</label>

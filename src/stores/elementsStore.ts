@@ -2,6 +2,7 @@ import { reactive, shallowRef } from 'vue'
 import WrapperElement from '../components/BuildElements/WrapperElement.vue'
 import type { ElementsStore } from '@/interfaces/ElementStore'
 import type { ElementData } from '@/interfaces/ElementData'
+import type { DomElementConfig } from '@/interfaces/DomElementConfig'
 
 export const elementsStore: ElementsStore = reactive({
   dom: {
@@ -24,5 +25,13 @@ export const elementsStore: ElementsStore = reactive({
     })
 
     return elementData
-  }
+  },
+  getElementConfig(id: number, key: keyof DomElementConfig) {
+      const elementData = this.getElementData(id);
+      if (!elementData) {
+        return {}
+      }
+
+      return elementData.element.config[key];
+  },
 })

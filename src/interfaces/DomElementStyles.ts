@@ -1,3 +1,3 @@
 export interface DomElementStyles {
-  [k: string]: string
+  [k: string]: string|number
 }

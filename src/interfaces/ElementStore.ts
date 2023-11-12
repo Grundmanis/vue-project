@@ -10,5 +10,6 @@ export interface ElementsStore {
     type: Component
   }
   elements: DomElement[]
-  getElementData(id: number): ElementData | undefined
+  getElementData(id: number): ElementData | undefined,
+  getElementConfig(id: number, key: string): any, // TODO: remove any
 }

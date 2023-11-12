@@ -57,9 +57,9 @@ export default {
       return elementData.element.styles
     },
     updatedConfig() {
-      if (!this.config) {
-        return {};
-      }
+      // if (!this.config) {
+      //   return {};
+      // }
       const elementData = elementsStore.getElementData(this.id)
       if (!elementData) {
         return this.config

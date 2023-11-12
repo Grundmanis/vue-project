@@ -18,6 +18,13 @@ export default {
         isNestable: false,
         className: 'b-horizontal-menu',
         tag: 'ul',
+        styles: {
+          padding: 0,
+          margin: 0,
+          overflow: 'hidden',
+          backgroundColor: '#333',
+          listStyleType: 'none',
+        },
         config: {
           list: [
             {
@@ -46,14 +53,7 @@ export default {
             }
           }
         },
-        styles: {
-          padding: 0,
-          margin: 0,
-          overflow: 'hidden',
-          backgroundColor: '#333',
-          listStyleType: 'none',
-        }
-      }
+      },
     }
   }
 }
@@ -61,8 +61,8 @@ export default {
 
 <template>
   <ElementTemplate v-bind="props">
-    <li :key="index" v-for="(listElement, index) in elementsStore.getElementData(id)?.element.config.list">
-      <a href="#" :style="elementsStore.getElementData(id)?.element.config.children['a'].styles">
+    <li :key="index" v-for="(listElement, index) in elementsStore.getElementConfig(id, 'list')">
+      <a href="#" :style="elementsStore.getElementConfig(id, 'children')['a']?.styles">
         {{ listElement.text }}
       </a>
     </li>

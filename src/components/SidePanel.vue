@@ -9,21 +9,21 @@ import ElementsToInsert from './ElementsToInsert.vue'
 <script lang="ts">
   export default {
     methods: {
-      deleteStyle(key: string|number) {
+      deleteStyle(key: string) {
         delete activeStore.updatedStyles[key]
       },
       addNewStyle(  ) {
         activeStore.updatedStyles['-'] = '';
       },
-      changeKey(key: string|number, event, index: number) {
+      changeKey(key: string, newValue: string, index: number) {
         let keyValues = Object.entries(activeStore.updatedStyles);
-        keyValues.splice(index,0, [event.target.value, activeStore.updatedStyles[key]]);
+        keyValues.splice(index,0, [newValue, activeStore.updatedStyles[key]]);
         let newObj = Object.fromEntries(keyValues) 
         activeStore.updatedStyles = newObj;
         delete activeStore.updatedStyles[key];
       },
-      changeValue(key: string|number, event) {
-        activeStore.updatedStyles[key] = event.target.value;
+      changeValue(key: string, newValue: string,) {
+        activeStore.updatedStyles[key] = newValue;
       }
     }
   }
