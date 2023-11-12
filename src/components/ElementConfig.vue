@@ -18,7 +18,7 @@ export default {
     <div v-for="(value, name, index) in activeStore.config" :key="index">
       <div v-if="!Arr.isArray(activeStore.config[name as keyof DomElementConfig])">
         <h4>Change the {{name}}</h4>
-        <input type="text" class="b-text-element" v-model="activeStore.config[name as keyof DomElementConfig]" />
+        <input type="text" :class="`b-${name}-element`" v-model="activeStore.config[name as keyof DomElementConfig]" />
       </div>
       <!-- <div v-else>
 

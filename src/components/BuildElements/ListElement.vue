@@ -18,8 +18,7 @@ export default {
         isNestable: false,
         className: 'b-list',
         elementConfig: {
-          tag: 'ul', // TODO: add ul type
-          type: 'vertical',
+          tag: 'ul',
           list: [
             {
               text: 'Home',
@@ -33,7 +32,7 @@ export default {
             {
               text: 'Contacts',
             },
-          ]
+          ],
         },
         elementStyles: {
           width: '300px',
@@ -49,7 +48,7 @@ export default {
 </script>
 
 <template>
-  <ElementTemplate v-bind="props" :class="elementsStore.getElementData(id)?.element.config.type === 'vertical' ? 'vertical' : 'horizontal'">
+  <ElementTemplate v-bind="props">
     <li :key="index" v-for="(listElement, index) in elementsStore.getElementData(id)?.element.config.list">{{ listElement.text }}</li>
   </ElementTemplate>
 </template>
