@@ -6,6 +6,29 @@ import ElementConfig from './ElementConfig.vue'
 import ElementsToInsert from './ElementsToInsert.vue'
 </script>
 
+<script lang="ts">
+  export default {
+    methods: {
+      deleteStyle(key: string|number) {
+        delete activeStore.updatedStyles[key]
+      },
+      addNewStyle(  ) {
+        activeStore.updatedStyles['-'] = '';
+      },
+      changeKey(key: string|number, event, index: number) {
+        let keyValues = Object.entries(activeStore.updatedStyles);
+        keyValues.splice(index,0, [event.target.value, activeStore.updatedStyles[key]]);
+        let newObj = Object.fromEntries(keyValues) 
+        activeStore.updatedStyles = newObj;
+        delete activeStore.updatedStyles[key];
+      },
+      changeValue(key: string|number, event) {
+        activeStore.updatedStyles[key] = event.target.value;
+      }
+    }
+  }
+</script>
+
 <template>
   <div id="side-panel">
     <h3>Global options</h3>
@@ -22,7 +45,13 @@ import ElementsToInsert from './ElementsToInsert.vue'
     <hr />
     <div>
       <h3>Styles</h3>
-      <ElementStyles />
+      <ElementStyles 
+        @changeKey="changeKey"
+        @changeValue="changeValue"
+        @deleteStyle="deleteStyle"
+        @addNewStyle="addNewStyle"
+        :updatedStyles="activeStore.updatedStyles"
+       />
       <hr />
     </div>
     <div>

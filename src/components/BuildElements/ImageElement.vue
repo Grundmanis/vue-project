@@ -18,10 +18,10 @@ export default {
         isNestable: false,
         tag: 'div',
         className: 'b-img',
-        elementConfig: {
+        config: {
           src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
         },
-        elementStyles: {
+        styles: {
           width: '300px',
           padding: '0',
           margin: '0',

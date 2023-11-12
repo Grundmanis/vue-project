@@ -6,6 +6,7 @@ import BoxElement from './BuildElements/BoxElement.vue'
 import TextElement from './BuildElements/TextElement.vue'
 import ImageElement from './BuildElements/ImageElement.vue'
 import ListElement from './BuildElements/ListElement.vue'
+import HorizontalMenuElement from './BuildElements/HorizontalMenuElement.vue'
 import type { DomElement } from '@/interfaces/DomElement'
 </script>
 
@@ -40,6 +41,9 @@ export default {
     </li>
     <li>
       <button id="b-add-list" v-on:click="addElement(ListElement)">List</button>
+    </li>
+    <li>
+      <button id="b-add-list" v-on:click="addElement(HorizontalMenuElement)">Horizontal menu</button>
     </li>
   </ul>
 </template>

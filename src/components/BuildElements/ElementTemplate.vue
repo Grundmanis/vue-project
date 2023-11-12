@@ -17,11 +17,11 @@ export default {
     },
     tag: String,
     className: String,
-    elementStyles: {
+    styles: {
       type: Object as PropType<DomElementStyles>,
       required: true
     },
-    elementConfig: Object as PropType<DomElementConfig>,
+    config: Object as PropType<DomElementConfig>,
     isNestable: Boolean
   },
   data() {
@@ -36,17 +36,17 @@ export default {
     }
 
     if (Obj.isEmpty(elementData.element.styles)) {
-      elementData.element.styles = this.elementStyles
+      elementData.element.styles = this.styles
     }
-    if (this.elementConfig && Obj.isEmpty(elementData.element.config)) {
-      elementData.element.config = this.elementConfig
+    if (this.config && Obj.isEmpty(elementData.element.config)) {
+      elementData.element.config = this.config
     }
   },
   computed: {
     updatedStyles() {
       const elementData = elementsStore.getElementData(this.id)
       if (!elementData) {
-        return this.elementStyles
+        return this.styles
       }
 
       if (activeStore.active === this.id && !Obj.isEmpty(activeStore.updatedStyles)) {
@@ -57,12 +57,12 @@ export default {
       return elementData.element.styles
     },
     updatedConfig() {
-      if (!this.elementConfig) {
+      if (!this.config) {
         return {};
       }
       const elementData = elementsStore.getElementData(this.id)
       if (!elementData) {
-        return this.elementConfig
+        return this.config
       }
 
       if (activeStore.active === this.id && !Obj.isEmpty(activeStore.config)) {

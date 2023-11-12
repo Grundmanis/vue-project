@@ -7,6 +7,8 @@
   top: 0;
   min-width: 400px;
   height: 100vh;
+  background-color: #fff;
+  padding: 20px;
 }
 .showGrid .b-element {
   border: 1px dotted #8f8f8f;
@@ -42,7 +44,9 @@
   width: 100%;
   display: block;
 }
-
-.b-list.horizontal li {
-  display: inline;
+.b-horizontal-menu {
+  padding: 0;
+}
+.b-horizontal-menu li {
+  float: left;
 }

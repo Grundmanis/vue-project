@@ -17,7 +17,7 @@ export default {
         id: this.id,
         isNestable: false,
         className: 'b-list',
-        elementConfig: {
+        config: {
           tag: 'ul',
           list: [
             {
@@ -34,7 +34,7 @@ export default {
             },
           ],
         },
-        elementStyles: {
+        styles: {
           width: '300px',
           fontSize: '14px',
           color: '#000',

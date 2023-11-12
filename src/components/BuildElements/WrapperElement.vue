@@ -17,7 +17,7 @@ export default {
         isNestable: true,
         tag: 'section',
         className: 'b-wrapper',
-        elementStyles: {
+        styles: {
           height: 'auto',
           minHeight: '100vh',
           width: '100%',

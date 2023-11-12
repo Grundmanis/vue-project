@@ -1,14 +1,56 @@
 <script setup lang="ts">
-import { activeStore } from '../stores/activeStore'
+import type { DomElementStyles } from '@/interfaces/DomElementStyles';
+import type { PropType } from 'vue';
+</script>
+
+<script lang="ts">
+export default {
+  props: {
+    updatedStyles: {
+      required: true,
+      type: Object as PropType<DomElementStyles>,
+    },
+  },
+  emits: ['changeKey', 'changeValue', 'deleteStyle', 'addNewStyle'],
+  data() {
+    return {
+      styleKeys: [
+        '-',
+        'display',
+        'color',
+        'textAlign',
+        'padding',
+        'margin',
+        'textDecoration',
+        'height',
+        'minHeight',
+        'backgroundColor',
+        'fontSize',
+        'width',
+        'listStyleType',
+        'overflow'
+      ],
+      // updatedStyles: this.styledObject,
+    }
+  },
+}
 </script>
 
 <template>
-  <div v-for="(style, key, index) in activeStore.updatedStyles" v-bind:key="index">
-    <label>{{ key }}</label>
+  <div v-for="(style, key, index) in updatedStyles" v-bind:key="index">
+    <select v-on:change="$emit('changeKey', key, $event, index)">
+      <option v-for="(styleKey, index) in styleKeys" :selected="key === styleKey" :key="index" :value="styleKey">
+        {{ styleKey }}
+      </option>
+    </select>
     <input
       :class="`b-styled-element b-style-${key}`"
       type="text"
-      v-model="activeStore.updatedStyles[key]"
+      :value="updatedStyles[key]"
+      v-on:input="$emit('changeValue', key, $event)"
     />
+    <button v-on:click="$emit('deleteStyle', key)"><small>remove</small></button>
   </div>
+  <button v-on:click="$emit('addNewStyle')">Add new style</button>
+       
 </template>

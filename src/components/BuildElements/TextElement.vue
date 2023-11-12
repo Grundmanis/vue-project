@@ -17,11 +17,11 @@ export default {
         id: this.id,
         isNestable: false,
         className: 'b-text',
-        elementConfig: {
+        config: {
           text: 'lorem ipsum valis margulis',
           tag: 'p'
         },
-        elementStyles: {
+        styles: {
           width: 'auto',
           padding: '0',
           margin: '0',

@@ -17,7 +17,7 @@ export default {
         isNestable: true,
         tag: 'div',
         className: 'b-box',
-        elementStyles: {
+        styles: {
           height: 'auto',
           fontSize: '14px',
           minHeight: '100px',
