@@ -18,7 +18,7 @@ describe('Text Element', () => {
       cy.get('#side-panel').contains('color');
       cy.get('#side-panel').contains('Selected element #2');
       cy.get('#side-panel').contains('Change the text');
-      cy.get('#side-panel').contains('Change the type');
+      cy.get('#side-panel').contains('Change the tag');
       cy.get('.b-text-element');
     })
     it('should update the styles of added element', () => {
