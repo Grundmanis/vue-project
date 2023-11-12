@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { shallowRef, type PropType } from 'vue'
-import { activeStore } from '../../stores/activeStore'
-import { elementsStore } from '../../stores/elementsStore'
-import type { DomElementConfig } from '@/interfaces/DomElementConfig'
-import type { DomElementStyles } from '@/interfaces/DomElementStyles'
-import ElementToolbar from '../ElementToolbar.vue'
-import * as Obj from '@/helpers/Obj'
+  import { shallowRef, type PropType } from 'vue'
+  import { activeStore } from '../../stores/activeStore'
+  import { elementsStore } from '../../stores/elementsStore'
+  import type { DomElementConfig } from '@/interfaces/DomElementConfig'
+  import type { DomElementStyles } from '@/interfaces/DomElementStyles'
+  import ElementToolbar from '../ElementToolbar.vue'
+  import * as Obj from '@/helpers/Obj'
 </script>
 
 <script lang="ts">

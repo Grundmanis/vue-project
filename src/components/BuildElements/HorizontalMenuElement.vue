@@ -15,7 +15,6 @@ export default {
     return {
       props: {
         id: this.id,
-        isNestable: false,
         className: 'b-horizontal-menu',
         tag: 'ul',
         styles: {

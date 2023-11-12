@@ -15,7 +15,6 @@ export default {
     return {
       props: {
         id: this.id,
-        isNestable: false,
         tag: 'div',
         className: 'b-img',
         config: {

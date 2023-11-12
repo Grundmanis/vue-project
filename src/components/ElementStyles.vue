@@ -28,7 +28,8 @@ export default {
         'fontSize',
         'width',
         'listStyleType',
-        'overflow'
+        'overflow',
+        'backgroundImage'
       ],
       // updatedStyles: this.styledObject,
     }

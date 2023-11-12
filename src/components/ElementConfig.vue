@@ -3,7 +3,6 @@
   import * as Obj from '../helpers/Obj'
   import * as Arr from '../helpers/Arr'
   import ElementStyles from './ElementStyles.vue';
-  import Vue from 'vue'
 </script>
 
 <script lang="ts">
@@ -50,7 +49,6 @@ export default {
 
 
 <template>
-  <div v-if="!Obj.isEmpty(activeStore.config)">
     <div v-for="(value, name, index) in activeStore.config" :key="index">
       <div v-if="!Arr.isArray(activeStore.config[name]) && !Obj.isObject(activeStore.config[name])">
         <h4>Change the {{name}}</h4>
@@ -80,10 +78,10 @@ export default {
     </div>
 
     <div v-if="!Arr.isEmpty(activeStore.config?.children)">
-      <h4>Update the children</h4>
       <div v-for="(element, key, index) in activeStore.config.children" :key="index">
         <div v-if="!Obj.isEmpty(element.styles)">
 
+          <h4>Update the children styles</h4>
           <ElementStyles 
             @changeValue="(passedKey: string, newValue: string) => changeStyle(key.toString(), passedKey, newValue)" 
             :updatedStyles="element.styles" 
@@ -102,9 +100,10 @@ export default {
           <button v-on:click="activeStore.config.children[key].styles['backgroundColor'] = 'green'">Add new +</button> -->
 
 
+
+
         </div>
       </div>
     </div>
 
-  </div>
 </template>
