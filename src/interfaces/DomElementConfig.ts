@@ -1,14 +1,14 @@
-import type { DomElementStyles } from "./DomElementStyles"
+import type { DomElementStyles } from './DomElementStyles'
 
 export interface DomElementConfig {
   text?: string
   tag?: string
-  src?: string,
-  type?: string,
+  src?: string
+  type?: string
   list?: { text: string }[]
   children?: {
     [s: string]: {
-      styles: DomElementStyles,
+      styles: DomElementStyles
     }
   }
   // styles?: DomElementStyles

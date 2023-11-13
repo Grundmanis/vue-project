@@ -1,4 +1,5 @@
 describe('Sidebar', () => {
+
   it('should toggle the grid', () => {
     cy.visit('/')
     cy.get('#side-panel button').eq(0).click(); // first button is the box-element

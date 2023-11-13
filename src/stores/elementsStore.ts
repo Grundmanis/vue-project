@@ -27,11 +27,11 @@ export const elementsStore: ElementsStore = reactive({
     return elementData
   },
   getElementConfig(id: number, key: keyof DomElementConfig) {
-      const elementData = this.getElementData(id);
-      if (!elementData) {
-        return {}
-      }
+    const elementData = this.getElementData(id)
+    if (!elementData) {
+      return {}
+    }
 
-      return elementData.element.config[key];
-  },
+    return elementData.element.config[key]
+  }
 })

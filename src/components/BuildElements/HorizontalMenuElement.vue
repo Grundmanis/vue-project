@@ -22,37 +22,37 @@ export default {
           margin: 0,
           overflow: 'hidden',
           backgroundColor: '#333',
-          listStyleType: 'none',
+          listStyleType: 'none'
         },
         config: {
           list: [
             {
-              text: 'Home',
+              text: 'Home'
             },
             {
-              text: 'About',
+              text: 'About'
             },
             {
-              text: 'Price',
+              text: 'Price'
             },
             {
-              text: 'Contacts',
-            },
+              text: 'Contacts'
+            }
           ],
           children: {
-            'a': {
+            a: {
               styles: {
                 display: 'block',
                 color: 'white',
                 textAlign: 'center',
                 padding: '14px 16px',
                 textDecoration: 'none',
-                fontSize: '14px',
-              },
+                fontSize: '14px'
+              }
             }
           }
-        },
-      },
+        }
+      }
     }
   }
 }

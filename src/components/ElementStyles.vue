@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { DomElementStyles } from '@/interfaces/DomElementStyles';
-import type { PropType } from 'vue';
+import type { DomElementStyles } from '@/interfaces/DomElementStyles'
+import type { PropType } from 'vue'
 </script>
 
 <script lang="ts">
@@ -8,8 +8,8 @@ export default {
   props: {
     updatedStyles: {
       required: true,
-      type: Object as PropType<DomElementStyles>,
-    },
+      type: Object as PropType<DomElementStyles>
+    }
   },
   emits: ['changeKey', 'changeValue', 'deleteStyle', 'addNewStyle'],
   data() {
@@ -30,17 +30,26 @@ export default {
         'listStyleType',
         'overflow',
         'backgroundImage'
-      ],
+      ]
       // updatedStyles: this.styledObject,
     }
-  },
+  }
 }
 </script>
 
 <template>
   <div v-for="(style, key, index) in updatedStyles" v-bind:key="index">
-    <select v-on:change="$emit('changeKey', key, ($event.currentTarget as HTMLInputElement)?.value, index)">
-      <option v-for="(styleKey, index) in styleKeys" :selected="key === styleKey" :key="index" :value="styleKey">
+    <select
+      v-on:change="
+        $emit('changeKey', key, ($event.currentTarget as HTMLInputElement)?.value, index)
+      "
+    >
+      <option
+        v-for="(styleKey, index) in styleKeys"
+        :selected="key === styleKey"
+        :key="index"
+        :value="styleKey"
+      >
         {{ styleKey }}
       </option>
     </select>
@@ -54,5 +63,4 @@ export default {
     <button v-on:click="$emit('deleteStyle', key)"><small>remove</small></button>
   </div>
   <button v-on:click="$emit('addNewStyle')">Add new style</button>
-       
 </template>

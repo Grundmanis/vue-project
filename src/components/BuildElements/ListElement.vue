@@ -20,25 +20,25 @@ export default {
           tag: 'ul',
           list: [
             {
-              text: 'Home',
+              text: 'Home'
             },
             {
-              text: 'About',
+              text: 'About'
             },
             {
-              text: 'Price',
+              text: 'Price'
             },
             {
-              text: 'Contacts',
-            },
-          ],
+              text: 'Contacts'
+            }
+          ]
         },
         styles: {
           width: '300px',
           fontSize: '14px',
           color: '#000',
           listStyleType: 'disc',
-          padding: '0 0 0 40px',
+          padding: '0 0 0 40px'
         }
       }
     }
@@ -48,6 +48,11 @@ export default {
 
 <template>
   <ElementTemplate v-bind="props">
-    <li :key="index" v-for="(listElement, index) in elementsStore.getElementData(id)?.element.config.list">{{ listElement.text }}</li>
+    <li
+      :key="index"
+      v-for="(listElement, index) in elementsStore.getElementData(id)?.element.config.list"
+    >
+      {{ listElement.text }}
+    </li>
   </ElementTemplate>
 </template>

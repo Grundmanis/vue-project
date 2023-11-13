@@ -18,12 +18,12 @@ export default {
         tag: 'div',
         className: 'b-img',
         config: {
-          src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
+          src: 'https://ionicframework.com/docs/img/demos/thumbnail.svg'
         },
         styles: {
           width: '300px',
           padding: '0',
-          margin: '0',
+          margin: '0'
         }
       }
     }

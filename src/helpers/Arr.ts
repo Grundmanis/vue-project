@@ -1,11 +1,11 @@
 export function isArray(targetObject: unknown) {
-  return targetObject instanceof Array;
+  return targetObject instanceof Array
 }
 
-export function isEmpty(targetObject: any) { // TODO: remove any
+export function isEmpty(targetObject: any) {
+  // TODO: remove any
   if (!targetObject) {
-    return true;
+    return true
   }
-  return targetObject.length < 1;
+  return targetObject.length < 1
 }
-

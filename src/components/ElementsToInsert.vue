@@ -43,7 +43,9 @@ export default {
       <button id="b-add-list" v-on:click="addElement(ListElement)">List</button>
     </li>
     <li>
-      <button id="b-add-list" v-on:click="addElement(HorizontalMenuElement)">Horizontal menu</button>
+      <button id="b-add-list" v-on:click="addElement(HorizontalMenuElement)">
+        Horizontal menu
+      </button>
     </li>
   </ul>
 </template>

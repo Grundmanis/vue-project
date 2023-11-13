@@ -17,6 +17,7 @@ export default {
         isNestable: true,
         tag: 'div',
         className: 'b-box',
+        // onNewLine: false, // TODO:
         styles: {
           height: 'auto',
           fontSize: '14px',

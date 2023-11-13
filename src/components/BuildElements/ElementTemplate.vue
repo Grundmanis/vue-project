@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import { shallowRef, type PropType } from 'vue'
-  import { activeStore } from '../../stores/activeStore'
-  import { elementsStore } from '../../stores/elementsStore'
-  import type { DomElementConfig } from '@/interfaces/DomElementConfig'
-  import type { DomElementStyles } from '@/interfaces/DomElementStyles'
-  import ElementToolbar from '../ElementToolbar.vue'
-  import * as Obj from '@/helpers/Obj'
+import { shallowRef, type PropType } from 'vue'
+import { activeStore } from '../../stores/activeStore'
+import { elementsStore } from '../../stores/elementsStore'
+import type { DomElementConfig } from '@/interfaces/DomElementConfig'
+import type { DomElementStyles } from '@/interfaces/DomElementStyles'
+import ElementToolbar from '../ElementToolbar.vue'
+import * as Obj from '@/helpers/Obj'
 </script>
 
 <script lang="ts">
@@ -74,14 +74,14 @@ export default {
     },
     isActive() {
       return activeStore.active === this.id ? 'active' : ''
-    },
+    }
   },
   methods: {
     activate() {
       // TODO: check the ref issue with config\
       const updatedConfig = this.updatedConfig
       const config = updatedConfig ? Obj.clone(updatedConfig) : {} // TODO: not every el has config
-      
+
       activeStore.updatedStyles = this.updatedStyles
       activeStore.active = this.id
       activeStore.config = config
@@ -138,7 +138,7 @@ export default {
     v-on:click.capture="activate"
     :class="[`b-element ${className}`, isActive, isMouseOver ? 'hovered' : '']"
   >
-    <ElementToolbar :id="id" @onRemove="removeElement" @onDuplicate="duplicateElement"  />
+    <ElementToolbar :id="id" @onRemove="removeElement" @onDuplicate="duplicateElement" />
 
     <slot name="nested" v-if="isNestable">
       <component
