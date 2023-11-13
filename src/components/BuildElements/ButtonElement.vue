@@ -15,17 +15,20 @@ export default {
     return {
       props: {
         id: this.id,
-        className: 'b-text',
-        config: {
-          text: 'lorem ipsum valis margulis',
-          tag: 'p'
-        },
+        tag: 'div',
+        className: 'b-button',
         styles: {
-          width: 'auto',
-          padding: '0',
-          margin: '0',
-          color: '#000',
-          fontSize: ''
+          display: 'inline-block',
+        },
+        config: {
+          children: {
+            button: {
+              styles: {
+                fontSize: '14px'
+              },
+            }
+          },
+          text: 'Join us'
         }
       }
     }
@@ -34,7 +37,10 @@ export default {
 </script>
 
 <template>
+  
   <ElementTemplate v-bind="props">
-    {{ elementsStore.getElementData(id)?.element.config.text }}
+    <button :style="elementsStore.getElementConfig(id, 'children')['button']?.styles">
+      {{ elementsStore.getElementConfig(id, 'text') }}
+    </button>
   </ElementTemplate>
 </template>

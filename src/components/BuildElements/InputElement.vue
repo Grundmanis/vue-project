@@ -15,17 +15,20 @@ export default {
     return {
       props: {
         id: this.id,
-        className: 'b-text',
-        config: {
-          text: 'lorem ipsum valis margulis',
-          tag: 'p'
-        },
+        tag: 'div',
+        className: 'b-input',
         styles: {
-          width: 'auto',
-          padding: '0',
-          margin: '0',
-          color: '#000',
-          fontSize: ''
+          display: 'inline-block',
+        },
+        config: {
+          children: {
+            input: {
+              styles: {
+                fontSize: '14px'
+              },
+            }
+          },
+          placeholder: 'Search...'
         }
       }
     }
@@ -34,7 +37,8 @@ export default {
 </script>
 
 <template>
+  
   <ElementTemplate v-bind="props">
-    {{ elementsStore.getElementData(id)?.element.config.text }}
+    <input :style="elementsStore.getElementConfig(id, 'children')['input']?.styles" :placeholder="elementsStore.getElementConfig(id, 'placeholder')" />
   </ElementTemplate>
 </template>

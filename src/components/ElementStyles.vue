@@ -29,9 +29,9 @@ export default {
         'width',
         'listStyleType',
         'overflow',
-        'backgroundImage'
+        'backgroundImage',
+        'verticalAlign'
       ]
-      // updatedStyles: this.styledObject,
     }
   }
 }

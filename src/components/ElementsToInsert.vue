@@ -8,6 +8,8 @@ import ImageElement from './BuildElements/ImageElement.vue'
 import ListElement from './BuildElements/ListElement.vue'
 import HorizontalMenuElement from './BuildElements/HorizontalMenuElement.vue'
 import type { DomElement } from '@/interfaces/DomElement'
+import InputElement from './BuildElements/InputElement.vue'
+import ButtonElement from './BuildElements/ButtonElement.vue'
 </script>
 
 <script lang="ts">
@@ -43,8 +45,18 @@ export default {
       <button id="b-add-list" v-on:click="addElement(ListElement)">List</button>
     </li>
     <li>
-      <button id="b-add-list" v-on:click="addElement(HorizontalMenuElement)">
+      <button id="b-add-horizontal-menu" v-on:click="addElement(HorizontalMenuElement)">
         Horizontal menu
+      </button>
+    </li>
+    <li>
+      <button id="b-add-input" v-on:click="addElement(InputElement)">
+        Input
+      </button>
+    </li>
+    <li>
+      <button id="b-add-button" v-on:click="addElement(ButtonElement)">
+        Button
       </button>
     </li>
   </ul>
