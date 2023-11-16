@@ -1,4 +1,7 @@
 export function isEmpty(targetObject: Object) {
+  if (!targetObject) {
+    return true;
+  }
   return Object.keys(targetObject).length < 1
 }
 

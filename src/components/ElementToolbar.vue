@@ -20,7 +20,7 @@ export default {
     <button
       v-if="id !== elementsStore.dom.id"
       title="Remove"
-      class="b-action-remove"
+      class="b-action b-action-remove"
       v-on:click="$emit('onRemove')"
     >
       <TrashIcon />
@@ -28,7 +28,7 @@ export default {
     <button
       v-if="id !== elementsStore.dom.id"
       title="Duplicate"
-      class="b-action-duplicate"
+      class="b-action b-action-duplicate"
       v-on:click="$emit('onDuplicate')"
     >
       <DocumentDuplicateIcon />

@@ -47,9 +47,6 @@
   width: 100%;
   display: block;
 }
-.b-horizontal-menu {
-  padding: 0;
-}
-.b-horizontal-menu li {
-  float: left;
+.b-nav ul li a:hover {
+  background-color: #8f8f8f;
 }

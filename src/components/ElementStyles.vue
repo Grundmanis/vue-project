@@ -21,6 +21,7 @@ export default {
         'textAlign',
         'padding',
         'margin',
+        'marginRight',
         'textDecoration',
         'height',
         'minHeight',
@@ -30,7 +31,10 @@ export default {
         'listStyleType',
         'overflow',
         'backgroundImage',
-        'verticalAlign'
+        'verticalAlign',
+        'alignItems',
+        'justifyContent',
+        'flexRow',
       ]
     }
   }
