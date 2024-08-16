@@ -1,94 +1,95 @@
 <script setup lang="ts">
-import ElementTemplate from './ElementTemplate.vue'
-import { elementsStore } from '../../stores/elementsStore'
+  import ElementTemplate from './ElementTemplate.vue'
+  import { elementsStore } from '../../stores/elementsStore'
 </script>
 
 <script lang="ts">
 export default {
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
-  data() {
-    return {
-      props: {
-        id: this.id,
-        className: 'b-nav',
-        tag: 'nav',
-        styles: {
-          padding: '0 30px',
-          color: '#fff',
-          backgroundColor: '#333',
-          display: 'flex',
-          flexRow: 'row nowrap',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        },
-        config: {
-          list: [
-            {
-              text: 'Home'
-            },
-            {
-              text: 'About'
-            },
-            {
-              text: 'Price'
-            },
-            {
-              text: 'Contacts'
-            }
-          ],
-          children: {
-            a: {
-              styles: {
-                display: 'block',
-                color: 'white',
-                textAlign: 'center',
-                padding: '14px 16px',
-                textDecoration: 'none',
-                fontSize: '14px'
-              }
-            },
-            img: {
-              styles: {
-                height: '50px',
-                display: 'block',
-              }
-            },
-            brand: {
-              styles: {
-                color: '#fff',
-                display: 'block',
-                textDecoration: 'none',
-                marginRight: '20px',
-                fontSize: '18px',
-              }
-            },
-            list: {
-              styles: {
-                display: 'inline-block',
-              }
-            },
-            ul: {
-              styles: {
-                marginRight: 'auto',
-                padding: 0,
-              }
-            },
-          }
+    props: {
+        id: {
+            type: Number,
+            required: true
         }
-      }
-    }
-  }
+    },
+    data() {
+        return {
+            props: {
+                id: this.id,
+                className: "b-nav",
+                tag: "nav",
+                styles: {
+                    padding: "0 30px",
+                    color: "#fff",
+                    backgroundColor: "#333",
+                    display: "flex",
+                    flexRow: "row nowrap",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                },
+                config: {
+                    list: [
+                        {
+                            text: "Home"
+                        },
+                        {
+                            text: "About"
+                        },
+                        {
+                            text: "Price"
+                        },
+                        {
+                            text: "Contacts"
+                        }
+                    ],
+                    children: {
+                        a: {
+                            styles: {
+                                display: "block",
+                                color: "white",
+                                textAlign: "center",
+                                padding: "14px 16px",
+                                textDecoration: "none",
+                                fontSize: "14px"
+                            }
+                        },
+                        img: {
+                            styles: {
+                                height: "50px",
+                                display: "block",
+                            }
+                        },
+                        brand: {
+                            styles: {
+                                color: "#fff",
+                                display: "block",
+                                textDecoration: "none",
+                                marginRight: "20px",
+                                fontSize: "18px",
+                            }
+                        },
+                        list: {
+                            styles: {
+                                display: "inline-block",
+                            }
+                        },
+                        ul: {
+                            styles: {
+                                marginRight: "auto",
+                                padding: 0,
+                            }
+                        },
+                    }
+                }
+            }
+        };
+    },
 }
 
 // Pass the ImageComponent instead of img tag
 // Pass the TextComponent instead of some data here
 // Create the LinkComponent and pass it instead of a tag
 // Update the list component - add the URL feature, and then pass it instead of a ul > li
+// add the box
 </script>
 
 <template>

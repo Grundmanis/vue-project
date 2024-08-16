@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/vue/24/outline'
-import { elementsStore } from '../stores/elementsStore'
+import { elementsStore } from '../../stores/elementsStore'
 </script>
 
 <script lang="ts">

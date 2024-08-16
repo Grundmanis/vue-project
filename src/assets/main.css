@@ -10,6 +10,9 @@
   background-color: rgb(255, 255, 255, 0.3);
   padding: 20px;
 }
+#workarea {
+  background: #eeeeee url("http://ddd.fed.wiki.org/images/crosses.png");
+}
 #side-panel:hover {
   background-color: rgb(255, 255, 255, 0.9);
 }

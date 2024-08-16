@@ -16,21 +16,15 @@ export default {
         isNestable: true,
         tag: 'div',
         className: 'b-box',
-        // onNewLine: false, // TODO:
         styles: {
           height: 'auto',
-          fontSize: '14px',
           minHeight: '100px',
-          width: '100%',
-          display: 'block',
-          padding: '15px',
-
           // row
-          // display: 'flex',
-          // flexWrap: 'wrap', /* Allows columns to wrap onto new lines */
+          display: 'flex',
+          flexWrap: 'wrap', /* Allows columns to wrap onto new lines */
           // marginRight: '-15px',
           // marginLeft: '-15px',
-          // minWidth: '100px'
+          minWidth: '100px'
         }
       }
     }

@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import './assets/main.css'
 import './assets/themes/light.css'
-import SidePanel from './components/SidePanel.vue'
-import WorkArea from './components/WorkArea.vue'
 </script>
 
 <template>
-  <div>
-    <SidePanel />
-    <WorkArea />
-  </div>
+    <RouterView />
 </template>
 
 <style></style>

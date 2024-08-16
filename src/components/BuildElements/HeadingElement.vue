@@ -20,15 +20,14 @@ export default {
         id: this.id || elementsStore.incrementedId++,
         className: 'b-text',
         config: {
-          text: this.text || 'lorem ipsum valis margulis',
-          tag: 'p'
+          text: this.text || 'Playground title',
+          tag: 'h1'
         },
         styles: {
           width: 'auto',
           padding: '0',
           margin: '0',
           color: '#000',
-          fontSize: ''
         }
       }
     }

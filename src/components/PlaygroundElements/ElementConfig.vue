@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { activeStore } from '../stores/activeStore'
-import * as Obj from '../helpers/Obj'
-import * as Arr from '../helpers/Arr'
+import { activeStore } from '../../stores/activeStore'
+import * as Obj from '../../helpers/Obj'
+import * as Arr from '../../helpers/Arr'
 import ElementStyles from './ElementStyles.vue'
+import { elementsStore } from '@/stores/elementsStore'
 </script>
 
 <script lang="ts">
@@ -18,18 +19,21 @@ export default {
 
       activeStore.config.children[key].styles = newObj
       delete activeStore.config.children[key].styles[passedKey]
+      // elementsStore.saveElements();
     },
     changeStyle(key: string, passedKey: string, newValue: string) {
       if (!activeStore.config.children) {
         return
       }
       activeStore.config.children[key].styles[passedKey] = newValue
+      // elementsStore.saveElements();
     },
     addNewStyle(key: string) {
       if (!activeStore.config.children) {
         return
       }
       activeStore.config.children[key].styles['-'] = ''
+      // elementsStore.saveElements();
     },
     deleteStyle(key: string, passedKey: string) {
       if (!activeStore.config.children) {
@@ -41,6 +45,7 @@ export default {
       let newObj = Object.fromEntries(keyValues)
       activeStore.config.children[key].styles = newObj
       delete activeStore.config.children[key].styles[passedKey]
+      // elementsStore.saveElements();
     }
   },
   components: { ElementStyles }

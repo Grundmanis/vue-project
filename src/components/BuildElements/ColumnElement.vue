@@ -23,14 +23,8 @@ export default {
           minHeight: '100px',
           width: '100%',
           display: 'block',
-          padding: '15px',
-
-          // row
-          // display: 'flex',
-          // flexWrap: 'wrap', /* Allows columns to wrap onto new lines */
-          // marginRight: '-15px',
-          // marginLeft: '-15px',
-          // minWidth: '100px'
+          flex: 1,
+          padding: '15px'
         }
       }
     }

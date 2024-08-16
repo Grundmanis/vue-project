@@ -22,6 +22,7 @@ export default {
         'padding',
         'margin',
         'marginRight',
+        'marginLeft',
         'textDecoration',
         'height',
         'minHeight',
@@ -35,6 +36,12 @@ export default {
         'alignItems',
         'justifyContent',
         'flexRow',
+        'border',
+        'float',
+        'flexWrap',
+        'flex',
+        'boxSizing',
+        'minWidth'
       ]
     }
   }
@@ -42,6 +49,11 @@ export default {
 </script>
 
 <template>
+  <h3>Alignment</h3>
+  <button v-on:click="$emit('changeValue', 'textAlign', 'left')">text-left</button>
+  <button v-on:click="$emit('changeValue', 'textAlign', 'center')">text-center</button>
+  <button v-on:click="$emit('changeValue', 'textAlign', 'right')">text-right</button>
+  <h3>CSS</h3>
   <div v-for="(style, key, index) in updatedStyles" v-bind:key="index">
     <select
       v-on:change="

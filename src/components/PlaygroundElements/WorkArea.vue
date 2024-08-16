@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { elementsStore } from '../stores/elementsStore'
+import { elementsStore } from '../../stores/elementsStore'
 </script>
 
 <template>

@@ -4,7 +4,7 @@ import { activeStore } from '../../stores/activeStore'
 import { elementsStore } from '../../stores/elementsStore'
 import type { DomElementConfig } from '@/interfaces/DomElementConfig'
 import type { DomElementStyles } from '@/interfaces/DomElementStyles'
-import ElementToolbar from '../ElementToolbar.vue'
+import ElementToolbar from '../PlaygroundElements/ElementToolbar.vue'
 import * as Obj from '@/helpers/Obj'
 </script>
 
@@ -13,7 +13,7 @@ export default {
   props: {
     id: {
       type: Number,
-      required: true
+      // required: true
     },
     tag: String,
     className: String,
@@ -26,11 +26,12 @@ export default {
   },
   data() {
     return {
-      isMouseOver: false
+      isMouseOver: false,
+      dataId: this.id || elementsStore.incrementedId++,
     }
   },
   created() {
-    const elementData = elementsStore.getElementData(this.id)
+    const elementData = elementsStore.getElementData(this.dataId)
     if (!elementData) {
       return
     }
@@ -44,36 +45,42 @@ export default {
   },
   computed: {
     updatedStyles() {
-      const elementData = elementsStore.getElementData(this.id)
+      const elementData = elementsStore.getElementData(this.dataId)
       if (!elementData) {
         return this.styles
       }
 
-      if (activeStore.active === this.id && !Obj.isEmpty(activeStore.updatedStyles)) {
+      if (activeStore.active === this.dataId && !Obj.isEmpty(activeStore.updatedStyles)) {
         elementData.element.styles = activeStore.updatedStyles
         return activeStore.updatedStyles
       }
 
+
+      console.log("update styles");
+      elementsStore.saveElements();
       return elementData.element.styles
     },
     updatedConfig() {
       // if (!this.config) {
       //   return {};
       // }
-      const elementData = elementsStore.getElementData(this.id)
+      const elementData = elementsStore.getElementData(this.dataId)
       if (!elementData) {
         return this.config
       }
 
-      if (activeStore.active === this.id && !Obj.isEmpty(activeStore.config)) {
+      if (activeStore.active === this.dataId && !Obj.isEmpty(activeStore.config)) {
         elementData.element.config = activeStore.config
         return activeStore.config
       }
 
+      console.log("update config");
+      elementsStore.saveElements();
+
       return elementData.element.config
     },
     isActive() {
-      return activeStore.active === this.id ? 'active' : ''
+      return activeStore.active === this.dataId ? 'active' : ''
     }
   },
   methods: {
@@ -83,7 +90,7 @@ export default {
       const config = updatedConfig ? Obj.clone(updatedConfig) : {} // TODO: not every el has config
 
       activeStore.updatedStyles = this.updatedStyles
-      activeStore.active = this.id
+      activeStore.active = this.dataId
       activeStore.config = config
     },
     setMouseOver(isMouseOver: boolean) {
@@ -91,23 +98,28 @@ export default {
       this.isMouseOver = isMouseOver
     },
     removeElement() {
-      const elementData = elementsStore.getElementData(this.id)
+      elementsStore.updateHistory();
+      // TODO: move to elementsStore
+      const elementData = elementsStore.getElementData(this.dataId)
       if (!elementData) {
         return
       }
       elementsStore.elements.splice(elementData.index, 1)
     },
     childElements() {
+      // TODO: move to elementsStore
       const children = []
       for (const element of elementsStore.elements) {
-        if (element.parentId == this.id) {
+        if (element.parentId == this.dataId) {
           children.push(element)
         }
       }
       return children
     },
     duplicateElement() {
-      const elementData = elementsStore.getElementData(this.id)
+      elementsStore.updateHistory();
+      // TODO: move to elementsStore
+      const elementData = elementsStore.getElementData(this.dataId)
       if (!elementData) {
         return
       }
@@ -123,6 +135,8 @@ export default {
         config: newConfig,
         type: shallowRef(elementData.element.type) // TODO: refactor, no need to copy the whole object
       }
+
+      console.log({newElement});
       elementsStore.elements.splice(elementData.index, 0, newElement)
     }
   }
